@@ -18,37 +18,34 @@
 
     let's try experimental trials -->
     <Screen v-for="(trial, i) in trialData"
-      :key="i">
-        
+        :key="i">
+            
         <img :src="trial.images" /> 
-          
+              
         <!-- evtl. muss ich mir "einfach" (haha) eigene buttons bauen
-        <ForcedChoiceInput
-          :response.sync= "$magpie.measurements.category"
-          :options="['A', 'B']"
-          :feedbackTime=-1
-          @click="isActive = !isActive" 
-          :class="{correct:isActive}" /> -->
-        <button 
-        class="option" 
-        :class="{correct:isActive}"
-        @click="isActive = !isActive"> A </button>
+            <button 
+            class="option" 
+            :class="[isActive ? 'option' : 'deactivated']"
+            @click="isActive = !isActive"> A </button>
 
-        <button 
-        class="option" 
-        :class="{wrong:isActive}"
-        @click="isActive = !isActive"> B </button>
-        
-        <p v-show="$magpie.measurements.category === 'A'">
-            Korrekt! <br >
-            <button @click= "$magpie.saveAndNextScreen();">Weiter</button>
-        </p>
-        <p v-show="$magpie.measurements.category === 'B'">
-            Falsch! <br >
-            <button @click= "$magpie.saveAndNextScreen();">Weiter</button>
-        </p>
-        <!--  :class="{'correct': $magpie.measurements.category === 'A'}" -->
-          
+            <button 
+            class="option" 
+            :class="[isActive ? 'option' : 'deactivated']"
+            @click="isActive = !isActive"> B </button> -->
+            <LockedChoiceInput
+              :response.sync= "$magpie.measurements.category"
+              :options="['A', 'B']"
+              :feedbackTime=-1 /> 
+            
+            <p v-if="$magpie.measurements.category === 'A'">
+                Korrekt! <br >
+                <button @click= "$magpie.saveAndNextScreen();">Weiter</button>
+            </p>
+            <p v-if="$magpie.measurements.category === 'B'">
+                Falsch! <br >
+                <button @click= "$magpie.saveAndNextScreen();">Weiter</button>
+            </p>
+            
     </Screen>
     
 
@@ -62,23 +59,34 @@
 
 
 <script>
-  import trialData from '../trials/stimulist.csv';
-  import _ from 'lodash';
+  import LockedChoiceInput from './LockedChoiceInput'
+  import trialData from '../trials/stimulist.csv'
+  import _ from 'lodash'
 
   export default {
     name: 'App',
+    components: { LockedChoiceInput },
     data() {
       return {
-        trialData,
-        isActive: false
+        trialData
       };
     }
   };
   
 </script>
 
-<style>
-.option {
+<!-- <style>
+.deactivated {
+  pointer-events: none;
+  background-color: #ffd633;
+}
+
+.activated {
+    pointer-events: auto;
+    background-color: #3333ff;
+}
+
+.forced_choice .options .option {
     background-color: #1e1e1e10;
     color: #1e1e1e;
     line-height: 60px;
@@ -89,15 +97,15 @@
     margin-left: 80px;
 }
 
-.option:hover {
+.forced_choice .options .option:hover {
     background-color: #1e1e1e20;
 }
 
-.correct {
+.forced_choice .options .correct {
     background-color: #ffd633;
 }
 
-.wrong {
+.forced_choice .options .wrong {
     background-color: #3333ff;
 }
-</style>
+</style> -->
