@@ -17,7 +17,7 @@
 
 
     let's try experimental trials -->
-    <Screen v-for="(trial, i) in trialData"
+    <Screen v-for="(trial, i) in generalization"
         :key="i">
             
         <img :src="trial.images" /> 
@@ -60,7 +60,7 @@
 
 <script>
   import LockedChoiceInput from './LockedChoiceInput'
-  import trialData from '../trials/stimulist.csv'
+  import generalization from '../trials/generalization.csv'
   import _ from 'lodash'
 
   export default {
@@ -68,7 +68,7 @@
     components: { LockedChoiceInput },
     data() {
       return {
-        trialData
+        generalization
       };
     }
   };
