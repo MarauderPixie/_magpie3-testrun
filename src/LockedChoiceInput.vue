@@ -5,7 +5,7 @@
         v-for="option in options"
         :key="option"
         class="option"
-        :class="[isActive ? 'deactivated' : 'activated']"
+        :class="[isActive ? 'activated' : 'deactivated']"
         @click="onOptionClick(option); isActive = !isActive"
       >
         {{ option }}
@@ -31,7 +31,7 @@ export default {
   },
   data() {
       return {
-        isActive: false
+        isActive: true
       };
     },
   methods: {
@@ -47,7 +47,7 @@ export default {
 
 <style scoped>
 .deactivated {
-  background-color: #ffd633 !important;
+  /* background-color: #ffd633 !important; */
   pointer-events: none;
 }
 
@@ -66,8 +66,8 @@ export default {
   font-family: 'Lato', 'Noto Sans', sans-serif;
   font-size: 40px;
   line-height: 80px;
-    height: 80px;
-    width: 80px;
+  height: 80px;
+  width: 80px;
   font-weight: 700;
   letter-spacing: 0.9px;
   margin: 0 100px;
