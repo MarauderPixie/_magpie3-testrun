@@ -13,41 +13,49 @@
       At first you will have to guess, but you will gain experience as you go along. </p>
       
       <p>After you have completed your training, we will ask you a series of test questions about what you have learned.</p>
-    </InstructionScreen>
+    </InstructionScreen> -->
 
 
-    let's try experimental trials -->
-    <Screen v-for="(trial, i) in generalization"
+    <!-- TRAINING TRIALS -->
+    <Screen v-for="(trial, i) in training"
         :key="i">
             
-        <img :src="trial.images" /> 
+        <img :src="trial.image" /> 
               
-        <!-- evtl. muss ich mir "einfach" (haha) eigene buttons bauen
-            <button 
-            class="option" 
-            :class="[isActive ? 'option' : 'deactivated']"
-            @click="isActive = !isActive"> A </button>
-
-            <button 
-            class="option" 
-            :class="[isActive ? 'option' : 'deactivated']"
-            @click="isActive = !isActive"> B </button> -->
-            <LockedChoiceInput
-              :response.sync= "$magpie.measurements.category"
-              :options="['A', 'B']"
-              :feedbackTime=-1 /> 
+        <!-- evtl. muss ich mir "einfach" (haha) eigene buttons bauen -->
+        <LockedChoiceInput
+            :response.sync= "$magpie.measurements.category"
+            :options="['A', 'B']"
+            :feedbackTime=-1 /> 
             
-            <p v-if="$magpie.measurements.category === 'A'">
-                Korrekt! <br >
-                <button @click= "$magpie.saveAndNextScreen();">Weiter</button>
-            </p>
-            <p v-if="$magpie.measurements.category === 'B'">
-                Falsch! <br >
-                <button @click= "$magpie.saveAndNextScreen();">Weiter</button>
-            </p>
-            
+        <p v-if="$magpie.measurements.category === trial.correct1">
+            <b>Korrekt!</b> 
+            <br />
+            <button @click= "$magpie.saveAndNextScreen();">Weiter</button>
+        </p>
+        <p v-if="$magpie.measurements.category === trial.correct2">
+            <b>Falsch!</b> 
+            <br />
+            <button @click= "$magpie.saveAndNextScreen();">Weiter</button>
+        </p>
     </Screen>
-    
+
+
+    <!-- GENERALIZATION TRIALS -->
+    <Screen v-for="(trial, i) in generalization"
+        :key="i">
+
+        <img :src="trial.image" /> 
+
+        <LockedChoiceInput
+            :response.sync= "$magpie.measurements.category"
+            :options="['A', 'B']"
+            :feedbackTime=-1 /> 
+
+        <p v-if="$magpie.measurements.category">
+            <button @click= "$magpie.saveAndNextScreen();">Weiter</button>
+        </p>
+    </Screen>
 
     <!-- Demographics & result submission -->
     <PostTestScreen />
@@ -59,16 +67,19 @@
 
 
 <script>
-  import LockedChoiceInput from './LockedChoiceInput'
-  import generalization from '../trials/generalization.csv'
   import _ from 'lodash'
+  import LockedChoiceInput from './LockedChoiceInput'
+  import training from '../trials/training.csv'
+  import generalization from '../trials/generalization.csv'
+  
 
   export default {
     name: 'App',
     components: { LockedChoiceInput },
     data() {
       return {
-        generalization
+        training: _.shuffle(training),
+        generalization: _.shuffle(generalization)
       };
     }
   };
