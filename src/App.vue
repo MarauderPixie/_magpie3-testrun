@@ -26,7 +26,8 @@
         <LockedChoiceInput
             :response.sync= "$magpie.measurements.category"
             :options="['A', 'B']"
-            :feedbackTime=-1 /> 
+            :feedbackTime=-1
+            @click=buttonColor() /> 
             
         <p v-if="$magpie.measurements.category === trial.correct1">
             <b>Korrekt!</b> 
@@ -81,42 +82,10 @@
         training: _.shuffle(training),
         generalization: _.shuffle(generalization)
       };
+    },
+    socket: {
+      
     }
   };
   
 </script>
-
-<!-- <style>
-.deactivated {
-  pointer-events: none;
-  background-color: #ffd633;
-}
-
-.activated {
-    pointer-events: auto;
-    background-color: #3333ff;
-}
-
-.forced_choice .options .option {
-    background-color: #1e1e1e10;
-    color: #1e1e1e;
-    line-height: 60px;
-    height: 60px;
-    width: 60px;
-    font-size: 32px;
-    margin-right: 80px;
-    margin-left: 80px;
-}
-
-.forced_choice .options .option:hover {
-    background-color: #1e1e1e20;
-}
-
-.forced_choice .options .correct {
-    background-color: #ffd633;
-}
-
-.forced_choice .options .wrong {
-    background-color: #3333ff;
-}
-</style> -->
