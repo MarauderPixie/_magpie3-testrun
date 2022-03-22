@@ -1,5 +1,24 @@
 <template>
   <Experiment title="UOS - IKW">
+
+    <ConnectInteractiveScreen :title="'sorting into bins...'"></ConnectInteractiveScreen>
+
+    <Screen>
+      <p>Method acting:</p>
+      <br />
+      <b>{{ lastIter() }}</b>
+
+      <p> Variant: {{$magpie.socket.variant}} </p>
+      <p> Chain: {{$magpie.socket.chain}} </p>
+      <p> Generation: {{$magpie.socket.generation}} </p>
+      <p> Player: {{$magpie.socket.player}} </p>
+      <p> participantId: {{$magpie.socket.participantId}} </p>
+      <p> experimentId: {{$magpie.socket.experimentId}} </p>
+
+      <button @click="$magpie.saveAndNextScreen();">
+        Next
+      </button>
+    </Screen>
     
     <!-- <InstructionScreen :title="'Welcome'">
       Thank you for choosing deutschen Wahn.
@@ -17,7 +36,7 @@
 
 
     <!-- TRAINING TRIALS -->
-    <Screen v-for="(trial, i) in training"
+        <Screen v-for="(trial, i) in training"
         :key="i">
             
         <img :src="trial.image" /> 
@@ -26,8 +45,7 @@
         <LockedChoiceInput
             :response.sync= "$magpie.measurements.category"
             :options="['A', 'B']"
-            :feedbackTime=-1
-            @click=buttonColor() /> 
+            :feedbackTime=-1 /> 
             
         <p v-if="$magpie.measurements.category === trial.correct1">
             <b>Korrekt!</b> 
@@ -82,6 +100,19 @@
         training: _.shuffle(training),
         generalization: _.shuffle(generalization)
       };
+    },
+    methods: {
+      lastIter: function() {
+        var generation = this.$magpie.socket.generation
+
+        if (generation == 1) {
+          console.log("1st Gen!")
+        } else {
+          console.log("Next Gen!")
+        }
+
+        return generation
+      }
     },
     socket: {
       
