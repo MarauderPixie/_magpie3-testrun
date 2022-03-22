@@ -6,7 +6,8 @@
         :key="option"
         class="option"
         :class="[isActive ? 'activated' : 'deactivated']"
-        @click="onOptionClick(option); isActive = !isActive"
+        v-bind:style="{ backgroundColor: compBackground }"
+        @click="onOptionClick(option); isActive = !isActive; changeBG()"
       >
         {{ option }}
       </div>
@@ -20,7 +21,7 @@
  */
 export default {
   name: 'LockedChoiceInput',
-  props: {
+  props: { 
     /**
      * The possible options to choose from
      */
@@ -34,12 +35,20 @@ export default {
         isActive: true
       };
     },
+  computed: {
+    compBackground: function () {
+      return this.backgroundColor;
+    }
+  },
   methods: {
     onOptionClick(option) {
       /**
        * Change event with the chosen option. Useful in combination with `response.sync`
        */
       this.$emit('update:response', option);
+    },
+    changeBG: function (event) {
+      this.backgroundColor = "#3f3f3f";
     }
   }
 };
