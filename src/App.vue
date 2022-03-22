@@ -7,14 +7,7 @@
       <p>Method acting:</p>
       <br />
       <b>{{ lastIter() }}</b>
-
-      <p> Variant: {{$magpie.socket.variant}} </p>
-      <p> Chain: {{$magpie.socket.chain}} </p>
-      <p> Generation: {{$magpie.socket.generation}} </p>
-      <p> Player: {{$magpie.socket.player}} </p>
-      <p> participantId: {{$magpie.socket.participantId}} </p>
-      <p> experimentId: {{$magpie.socket.experimentId}} </p>
-
+      
       <button @click="$magpie.saveAndNextScreen();">
         Next
       </button>
@@ -113,9 +106,6 @@
 
         return generation
       }
-    },
-    socket: {
-      
     }
   };
   
