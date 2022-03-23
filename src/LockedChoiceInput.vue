@@ -6,10 +6,9 @@
         :key="option"
         class="option"
         :class="[isActive ? 'activated' : 'deactivated']"
-        v-bind:style="{ backgroundColor: compBackground }"
-        @click="onOptionClick(option); isActive = !isActive; changeBG()"
+        @click="onOptionClick(option); isActive = !isActive"
       >
-        {{ option }}
+        {{ option }} 
       </div>
     </div>
   </div>
@@ -35,20 +34,12 @@ export default {
         isActive: true
       };
     },
-  computed: {
-    compBackground: function () {
-      return this.backgroundColor;
-    }
-  },
   methods: {
     onOptionClick(option) {
       /**
        * Change event with the chosen option. Useful in combination with `response.sync`
        */
       this.$emit('update:response', option);
-    },
-    changeBG: function (event) {
-      this.backgroundColor = "#3f3f3f";
     }
   }
 };
@@ -56,8 +47,8 @@ export default {
 
 <style scoped>
 .deactivated {
-  /* background-color: #ffd633 !important; */
-  pointer-events: none;
+    /* background-color: #ffd633 !important; */
+    pointer-events: none;
 }
 
 .activated {
