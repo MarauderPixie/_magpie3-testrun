@@ -6,8 +6,12 @@
     <Screen>
       <p>Method acting:</p>
       <br />
-      <b>{{ lastIter() }}</b>
+      <b>{{ thisGen() }}</b>
       
+      <p>Dropping in to see what condition this condition is in:</p>
+      <br />
+      <b>{{ thisCond() }}</b>
+
       <button @click="$magpie.saveAndNextScreen();">
         Next
       </button>
@@ -95,7 +99,7 @@
       };
     },
     methods: {
-      lastIter: function() {
+      thisGen: function() {
         var generation = this.$magpie.socket.generation
 
         if (generation == 1) {
@@ -105,6 +109,10 @@
         }
 
         return generation
+      },
+      thisCond: function() {
+        var condition = this.$magpie.socket.variant
+        return condition
       }
     }
   };
