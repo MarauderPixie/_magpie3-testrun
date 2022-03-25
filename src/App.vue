@@ -1,7 +1,7 @@
 <template>
   <Experiment title="UOS - IKW">
 
-    <ConnectInteractiveScreen :title="'sorting into bins...'"></ConnectInteractiveScreen>
+    <!-- <ConnectInteractiveScreen :title="'sorting into bins...'"></ConnectInteractiveScreen> 
 
     <Screen>
       <p>Method acting:</p>
@@ -15,17 +15,17 @@
       <button @click="$magpie.saveAndNextScreen();">
         Next
       </button>
-    </Screen>
+    </Screen> -->
     
 
-    <!-- INSTRUCTIONS -->
+    <!-- INSTRUCTIONS 
     <InstructionScreen :title="'Welcome'">
       Thank you for choosing deutschen Wahn.
-    </InstructionScreen>
+    </InstructionScreen> -->
 
-    <InstructionScreen :title="'Introduction'">
+    <!-- <InstructionScreen :title="'Introduction'"> -->
       <!-- no rule-related language -->
-      <div v-if="thisCond() == 1 || thisCond() == 2">
+      <!-- <div v-if="thisCond() == 1 || thisCond() == 2">
           <p>In this experiment, you will be shown examples of geometric images.
           Your job is to learn to tell whether each example belongs to the <b>Alpha</b> or <b>Beta</b> category.</p>
           
@@ -33,10 +33,10 @@
           At first you will have to guess, but you will gain experience as you go along. </p>
           
           <p>After you have completed your training, we will ask you a series of test questions about what you have learned.</p>
-      </div>
+      </div> -->
 
       <!-- rule-related language -->
-      <div v-else>
+      <!-- <div v-else>
           <p>In this experiment, you will be shown examples of geometric images.
           Your job is to learn a rule that allows you to tell whether each example belongs to the <b>Alpha</b> or <b>Beta</b> category.</p>
 
@@ -45,7 +45,7 @@
           
           <p>Try your best to gain mastery of the Alpha and Beta categories.</p>
       </div>
-    </InstructionScreen>
+    </InstructionScreen> -->
 
 
     <!-- TRAINING TRIALS -->
@@ -116,8 +116,8 @@
 <script>
   import _ from 'lodash'
   import LockedChoiceInput from './LockedChoiceInput'
-  import training from '../trials/training.csv'
-  import generalization from '../trials/generalization.csv'
+  import raw_training from '../trials/training.csv'
+  import raw_generalization from '../trials/generalization.csv'
   
 
   export default {
@@ -125,8 +125,8 @@
     components: { LockedChoiceInput },
     data() {
       return {
-        training: _.shuffle(training.slice(1, 3)),
-        generalization: _.shuffle(generalization.slice(1, 3))
+        training: _.shuffle(raw_training.slice(1, 7)),
+        generalization: _.shuffle(raw_generalization.slice(1, 3))
       };
     },
     methods: {

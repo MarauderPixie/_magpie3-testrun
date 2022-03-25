@@ -8,7 +8,7 @@
         :class="[isActive ? 'activated' : 'deactivated']"
         @click="onOptionClick(option); isActive = !isActive"
       >
-        {{ option }} 
+        <div @click="bgClick()" v-bind:style="{ backgroundColor: compBackground }" > {{ option }} </div>
       </div>
     </div>
   </div>
@@ -31,15 +31,24 @@ export default {
   },
   data() {
       return {
-        isActive: true
+        isActive: true,
+        backgroundColor: '',
       };
     },
+  computed: {
+    compBackground: function() {
+      return this.backgroundColor;
+    }
+  },
   methods: {
     onOptionClick(option) {
       /**
        * Change event with the chosen option. Useful in combination with `response.sync`
        */
       this.$emit('update:response', option);
+    },
+    bgClick() {
+      this.backgroundColor = 'blue';    
     }
   }
 };
