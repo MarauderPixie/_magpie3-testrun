@@ -1,17 +1,17 @@
 <template>
   <Experiment title="UOS - IKW">
 
-    <!-- <ConnectInteractiveScreen :title="'sorting into bins...'"></ConnectInteractiveScreen> 
+    <ConnectInteractiveScreen :title="'sorting into bins...'"></ConnectInteractiveScreen> 
 
-    <Screen>
-      <p>Method acting:</p>
+    <!-- <Screen>
+      <p>Dropping in to see what condition this condition is in:
       <br />
-      <b>{{ thisGen() }}</b>
+      <b>Variant-Nr.: {{ thisCond() }}</b></p>
+
+      <p>Chain-Maker, Space Lord, Mother, Mother:
+      <br />
+      <b>Chain-Nr.: {{ thisChain() }}</b></p>
       
-      <p>Dropping in to see what condition this condition is in:</p>
-      <br />
-      <b>{{ thisCond() }}</b>
-
       <button @click="$magpie.saveAndNextScreen();">
         Next
       </button>
@@ -125,14 +125,14 @@
     components: { LockedChoiceInput },
     data() {
       return {
-        training: _.shuffle(raw_training.slice(1, 7)),
+        training: _.shuffle(raw_training.slice(1, 3)),
         generalization: _.shuffle(raw_generalization.slice(1, 3))
       };
     },
     methods: {
-      thisGen: function() {
-        var generation = this.$magpie.socket.generation
-        return generation
+      thisChain: function() {
+        var chain = this.$magpie.socket.chain
+        return chain
       },
       thisCond: function() {
         var condition = this.$magpie.socket.variant

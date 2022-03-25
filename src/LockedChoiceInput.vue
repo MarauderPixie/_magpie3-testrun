@@ -2,13 +2,17 @@
   <div class="forced_choice">
     <div class="options">
       <div
+        class="option"
         v-for="option in options"
         :key="option"
-        class="option"
-        :class="[isActive ? 'activated' : 'deactivated']"
-        @click="onOptionClick(option); isActive = !isActive"
+        v-bind:style="{ pointerEvents: compPointer }" 
+        @click="onOptionClick(option)"
       >
-        <div @click="bgClick()" v-bind:style="{ backgroundColor: compBackground }" > {{ option }} </div>
+        <div
+          @click="bgClick()" v-bind:style="{ backgroundColor: compBackground }" 
+        > 
+          {{ option }} 
+        </div>
       </div>
     </div>
   </div>
@@ -31,13 +35,16 @@ export default {
   },
   data() {
       return {
-        isActive: true,
         backgroundColor: '',
+        pointerEvents: 'auto'
       };
     },
   computed: {
     compBackground: function() {
       return this.backgroundColor;
+    },
+    compPointer: function() {
+      return this.pointerEvents;
     }
   },
   methods: {
@@ -46,6 +53,7 @@ export default {
        * Change event with the chosen option. Useful in combination with `response.sync`
        */
       this.$emit('update:response', option);
+      this.pointerEvents = 'none';
     },
     bgClick() {
       this.backgroundColor = 'blue';    
