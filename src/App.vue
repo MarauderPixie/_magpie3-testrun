@@ -1,9 +1,9 @@
 <template>
   <Experiment title="UOS - IKW">
 
-    <ConnectInteractiveScreen :title="'sorting into bins...'"></ConnectInteractiveScreen> 
+    <!-- <ConnectInteractiveScreen :title="'sorting into bins...'"></ConnectInteractiveScreen> 
 
-    <!-- <Screen>
+    <Screen>
       <p>Dropping in to see what condition this condition is in:
       <br />
       <b>Variant-Nr.: {{ thisCond() }}</b></p>
@@ -56,16 +56,16 @@
               
         <!-- evtl. muss ich mir "einfach" (haha) eigene buttons bauen -->
         <LockedChoiceInput
-            :response.sync= "$magpie.measurements.category"
+            :response.sync= "$magpie.measurements.response"
             :options="['A', 'B']"
             :feedbackTime=-1 /> 
             
-        <p v-if="$magpie.measurements.category === trial.correct1">
+        <p v-if="$magpie.measurements.response === trial.correct1">
             <b>Korrekt!</b> 
             <br />
             <button @click= "$magpie.saveAndNextScreen();">Weiter</button>
         </p>
-        <p v-if="$magpie.measurements.category === trial.correct2">
+        <p v-if="$magpie.measurements.response === trial.correct2">
             <b>Falsch!</b> 
             <br />
             <button @click= "$magpie.saveAndNextScreen();">Weiter</button>
@@ -95,11 +95,11 @@
         <img :src="trial.image" /> 
 
         <LockedChoiceInput
-            :response.sync= "$magpie.measurements.category"
+            :response.sync= "$magpie.measurements.response"
             :options="['A', 'B']"
             :feedbackTime=-1 /> 
 
-        <p v-if="$magpie.measurements.category">
+        <p v-if="$magpie.measurements.response">
             <button @click= "$magpie.saveAndNextScreen();">Weiter</button>
         </p>
     </Screen>
@@ -116,18 +116,40 @@
 <script>
   import _ from 'lodash'
   import LockedChoiceInput from './LockedChoiceInput'
-  import raw_training from '../trials/training.csv'
+  import raw_training_full from '../trials/training-full.csv'
+  import raw_training_simple from '../trials/training-simple.csv'
   import raw_generalization from '../trials/generalization.csv'
+
+
+  const training_order_0 = new Array(12).fill(_.shuffle(raw_training_full)).flat();
+  const training_order_1_0 = new Array(4).fill(_.shuffle(raw_training_simple)).flat();
+  const training_order_1_1 = new Array(10).fill(_.shuffle(raw_training_full)).flat();
+  const training_order_1 = [training_order_1_0, training_order_1_1].flat();
+
+  /* debugging & validation area */
+  // console.log("ordered array?", training_order_1)
   
+  /* for (let i in repeated) {
+    console.log("image nr.", i, "name:", repeated[i].image);
+  } */
+  
+  const check = "No";
 
   export default {
     name: 'App',
     components: { LockedChoiceInput },
     data() {
-      return {
-        training: _.shuffle(raw_training.slice(1, 3)),
-        generalization: _.shuffle(raw_generalization.slice(1, 3))
-      };
+      if (check == "Yes") { // doesn't work (like this) when working with $magpie.socket :/
+        return {
+          training: training_order_0.slice(0, 8),
+          generalization: _.shuffle(raw_generalization.slice(1, 3))
+        };
+      } else {
+        return {
+          training: training_order_1.slice(0, 8),
+          generalization: _.shuffle(raw_generalization.slice(1, 3))
+        };
+      }
     },
     methods: {
       thisChain: function() {
