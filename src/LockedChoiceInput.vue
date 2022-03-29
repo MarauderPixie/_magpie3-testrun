@@ -8,7 +8,7 @@
         :style="{ pointerEvents: compPointer, backgroundColor: compBackground }" 
         @click="onOptionClick(option); chosen = option"
       >
-        <span :id="option" :style="{ backgroundColor: (chosen === option ? 'blue' : '#1e1e1e00') }"> {{ option }} </span>
+        <div :id="option" :style="{ backgroundColor: (chosen === option ? '#1e1e1e20' : '#1e1e1e00') }"> {{ option }} </div>
       </div>
     </div>
   </div>
@@ -17,7 +17,7 @@
 <script>
 /**
  * Have the participant choose between multiple options.
- */
+ **/
 export default {
   name: 'LockedChoiceInput',
   props: { 
@@ -25,6 +25,10 @@ export default {
      * The possible options to choose from
      */
     options: {
+      type: Array,
+      required: true
+    },
+    correct: {
       type: Array,
       required: true
     }
@@ -67,14 +71,13 @@ export default {
   display: inline-block;
   font-family: 'Lato', 'Noto Sans', sans-serif;
   font-size: 40px;
-  line-height: 80px;
-  height: 80px;
-  width: 80px;
+  line-height: 90px;
+  height: 90px;
+  width: 100px;
   font-weight: 700;
   letter-spacing: 0.9px;
   margin: 0 100px;
   outline: none;
-  padding: 5px 10px;
   text-transform: uppercase;
 }
 
