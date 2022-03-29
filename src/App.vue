@@ -1,7 +1,7 @@
 <template>
   <Experiment title="UOS - IKW">
 
-    <!-- <ConnectInteractiveScreen :title="'sorting into bins...'"></ConnectInteractiveScreen> 
+    <ConnectInteractiveScreen :title="'sorting into bins...'"></ConnectInteractiveScreen> 
 
     <Screen>
       <p>Dropping in to see what condition this condition is in:
@@ -15,7 +15,7 @@
       <button @click="$magpie.saveAndNextScreen();">
         Next
       </button>
-    </Screen> -->
+    </Screen>
     
 
     <!-- INSTRUCTIONS 
@@ -49,8 +49,9 @@
 
 
     <!-- TRAINING TRIALS -->
-    <Screen v-for="(trial, i) in training"
-        :key="i">
+    <Screen 
+      v-for="(trial, i) in (thisCond() == 1 || thisCond() == 3 ? train_random : train_sorted)"
+      :key="i">
             
         <img :src="trial.image" /> 
               
@@ -72,24 +73,25 @@
     </Screen>
     
 
-    <InstructionScreen :title="'Introduction'">
+    <InstructionScreen>
       <!-- no rule-related language -->
       <div v-if="thisCond() == 1 || thisCond() == 2">
-          <p>For this part of the study, you will again choose the category you think each example belongs to. 
+          <p>For this part of the study, you will again choose the category you think each example belongs to. <br />
           This time you will not receive feedback.</p>
       </div>
 
       <!-- rule-related language -->
       <div v-else>
-          <p>For this part of the study, you will again apply the rule you learned to choose the category you 
-          think each example belongs to. This time you will not receive feedback.</p>
+          <p>For this part of the study, you will again apply the rule you learned to choose the category you think each example belongs to. <br />
+          This time you will not receive feedback.</p>
       </div>
     </InstructionScreen>
 
 
     <!-- GENERALIZATION TRIALS -->
-    <Screen v-for="(trial, i) in generalization"
-        :key="i">
+    <Screen 
+      v-for="(trial, i) in generalization"
+      :key="i">
 
         <img :src="trial.image" /> 
 
@@ -116,25 +118,20 @@
   import _ from 'lodash'
   import XorTraining from './XorTraining'
   import XorGeneralization from './XorGeneralization'
-  import raw_training_full from '../trials/training-full.csv'
-  import raw_training_simple from '../trials/training-simple.csv'
+  import raw_training_random from '../trials/training-full.csv'
+  import raw_training_sorted from '../trials/training-simple.csv'
   import raw_generalization from '../trials/generalization.csv'
 
+  
+  const training_order_0 = new Array(12).fill(_.shuffle(raw_training_random)).flat();
+  
   // prepare simple-rule-first-condition
-  const training_order_0 = new Array(12).fill(_.shuffle(raw_training_full)).flat();
-
-  const pre_sort_0 = new Array(4).fill(_.shuffle(raw_training_simple)).flat();
-  const pre_sort_1 = new Array(10).fill(_.shuffle(raw_training_full)).flat();
+  const pre_sort_0 = new Array(4).fill(_.shuffle(raw_training_sorted)).flat();
+  const pre_sort_1 = new Array(10).fill(_.shuffle(raw_training_random)).flat();
   const training_order_1 = [pre_sort_0, pre_sort_1].flat();
 
   /* debugging & validation area */
   // console.log("ordered array?", training_order_1)
-
-  var correct = []
-  for (let i in training_order_1) {
-    correct[i] = training_order_1[i].correct1
-  }
-  // console.log(correct)
   
   /* for (let i in repeated) {
     console.log("image nr.", i, "name:", repeated[i].image);
@@ -146,8 +143,9 @@
     components: { XorTraining, XorGeneralization },
     data() {
       return {
-        training: training_order_0.slice(0, 2),
-        correct: correct,
+        train_random: training_order_0.slice(0, 8),
+        train_sorted: training_order_1.slice(0, 8),
+        // correct: correct,
         generalization: _.shuffle(raw_generalization.slice(0, 8))
       }
     },
@@ -158,7 +156,7 @@
       },
       thisCond: function() {
         var condition = this.$magpie.socket.variant
-        // console.log("This condition has rll:", condition == 3 || condition == 4)
+        // console.log("This condition:", condition)
         return condition
       }
     }
