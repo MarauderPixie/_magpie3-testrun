@@ -29,9 +29,9 @@
       Thank you for choosing deutschen Wahn.
     </InstructionScreen> -->
 
-    <!-- <InstructionScreen :title="'Introduction'"> -->
+    <InstructionScreen :title="'Introduction'"> 
       <!-- no rule-related language -->
-      <!-- <div v-if="thisCond() == 1 || thisCond() == 2">
+      <div v-if="thisCond() == 1 || thisCond() == 2">
           <p>In this experiment, you will be shown examples of geometric images.
           Your job is to learn to tell whether each example belongs to the <b>Alpha</b> or <b>Beta</b> category.</p>
           
@@ -39,10 +39,10 @@
           At first you will have to guess, but you will gain experience as you go along. </p>
           
           <p>After you have completed your training, we will ask you a series of test questions about what you have learned.</p>
-      </div> -->
+      </div>
 
       <!-- rule-related language -->
-      <!-- <div v-else>
+      <div v-else>
           <p>In this experiment, you will be shown examples of geometric images.
           Your job is to learn a rule that allows you to tell whether each example belongs to the <b>Alpha</b> or <b>Beta</b> category.</p>
 
@@ -51,7 +51,7 @@
           
           <p>Try your best to gain mastery of the Alpha and Beta categories.</p>
       </div>
-    </InstructionScreen> -->
+    </InstructionScreen>
 
 
     <!-- TRAINING TRIALS -->
@@ -60,6 +60,8 @@
       :key="i">
 
         <Record :data="trial" />  
+        <!-- <Record :data="{...[coin]}" /> -->
+        <Record :data="grpIdent(coin)" :global=true />
         <img :src="trial.image" /> 
               
         <!-- evtl. muss ich mir "einfach" (haha) eigene buttons bauen -->
@@ -149,9 +151,9 @@
     data() {
       return {
         pictures: raw_generalization.map(task => task.image),
-        train_random: training_order_0.slice(0, 8),
-        train_sorted: training_order_1.slice(0, 8),
-        generalization: _.shuffle(raw_generalization.slice(0, 8)),
+        train_random: training_order_0.slice(0, 2),
+        train_sorted: training_order_1.slice(0, 2),
+        generalization: _.shuffle(raw_generalization.slice(0, 2)),
         coin: _.sample(['heads', 'tails'])
       }
     },
@@ -164,6 +166,16 @@
         var condition = this.$magpie.socket.variant
         // console.log("This condition:", condition)
         return condition
+      },
+      grpIdent: function(coin) {
+        const arr = {
+          condition: this.$magpie.socket.variant,
+          assignment: (coin === 'heads' ? 1 : 2)
+        };
+
+        const obj = Object.assign({}, arr);
+
+        return obj
       }
     }
   };
