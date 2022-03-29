@@ -55,7 +55,7 @@
         <img :src="trial.image" /> 
               
         <!-- evtl. muss ich mir "einfach" (haha) eigene buttons bauen -->
-        <LockedChoiceInput
+        <XorTraining
             :response.sync= "$magpie.measurements.response"
             :options="['A', 'B']"
             :correct=trial.correct1
@@ -93,7 +93,7 @@
 
         <img :src="trial.image" /> 
 
-        <LockedChoiceInput
+        <XorGeneralization
             :response.sync= "$magpie.measurements.response"
             :options="['A', 'B']"
             :feedbackTime=-1 /> 
@@ -114,7 +114,8 @@
 
 <script>
   import _ from 'lodash'
-  import LockedChoiceInput from './LockedChoiceInput'
+  import XorTraining from './XorTraining'
+  import XorGeneralization from './XorGeneralization'
   import raw_training_full from '../trials/training-full.csv'
   import raw_training_simple from '../trials/training-simple.csv'
   import raw_generalization from '../trials/generalization.csv'
@@ -142,12 +143,12 @@
 
   export default {
     name: 'App',
-    components: { LockedChoiceInput },
+    components: { XorTraining, XorGeneralization },
     data() {
       return {
-        training: training_order_0.slice(0, 8),
-        correct:  correct,
-        generalization: _.shuffle(raw_generalization.slice(1, 3))
+        training: training_order_0.slice(0, 2),
+        correct: correct,
+        generalization: _.shuffle(raw_generalization.slice(0, 8))
       }
     },
     methods: {

@@ -8,7 +8,7 @@
         :style="{ pointerEvents: compPointer }" 
         @click="onOptionClick(option); chosen = option"
       >
-        <div :id="option" :style="{ backgroundColor: bgClick(option, correct, chosen) }"> {{ option }} </div>
+        <div :id="option" :style="{ backgroundColor: bgClick(option, chosen) }"> {{ option }} </div>
       </div>
     </div>
   </div>
@@ -19,17 +19,13 @@
  * Have the participant choose between multiple options.
  **/
 export default {
-  name: 'LockedChoiceInput',
+  name: 'XorGeneralization',
   props: { 
     /**
      * The possible options to choose from
      */
     options: {
       type: Array,
-      required: true
-    },
-    correct: {
-      type: String,
       required: true
     }
   },
@@ -54,25 +50,12 @@ export default {
       this.pointerEvents = 'none';
       // this.backgroundColor = 'blue';
     },
-    bgClick(option, correct, chosen) {
-      // gelb: '#ffd633';
-      // blau: '#3333ff';
-      // console.log("option:", option, "\ncorrect:", correct, "\nchosen:", chosen)
-      // console.log(option === chosen && chosen === correct)
+    bgClick(option, chosen) {
+      // console.log("option:", option, "\nchosen:", chosen)
 
-      var coleur = '#1e1e1e00';
-
-      if (chosen == null) {
-        coleur == '#1e1e1e00';
-      } else if (option == chosen && correct != chosen) {
-        coleur = '#3333ff';
-      } else if (option != chosen && correct != chosen) {
-        coleur = '#ffd633';
-      } else if (option == chosen && correct == chosen) {
-        coleur = '#ffd633';
-      }
-      // old logic for testing:
-      // (chosen === option ? '#ffd633' : '#1e1e1e00');
+      var coleur = (chosen === option ? '#49b694' : '#1e1e1e00');
+      // teal-ish green: '#49b694';
+      // salmon-y orange: '#fb6f37';
 
       return this.backgroundColor = coleur;
     }
