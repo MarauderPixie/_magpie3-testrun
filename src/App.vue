@@ -67,12 +67,9 @@
             :correct="(coin === 'heads' ? trial.correct1 : trial.correct2)"
             :feedbackTime=-1 /> 
             
-        <p v-if="$magpie.measurements.response === (coin === 'heads' ? trial.correct1 : trial.correct2)">
-            <b>Correct!</b> 
-            <button @click= "$magpie.saveAndNextScreen();">Next</button>
-        </p>
-        <p v-if="$magpie.measurements.response === (coin === 'heads' ? trial.correct2 : trial.correct1)">
-            <b>Wrong!</b> 
+        <p v-if="$magpie.measurements.response">
+            <span v-if="$magpie.measurements.response === (coin === 'heads' ? trial.correct1 : trial.correct2)"><b>Correct!</b></span> 
+            <span v-else><b>Wrong!</b></span>
             <button @click= "$magpie.saveAndNextScreen();">Next</button>
         </p>
     </Screen>
