@@ -62,12 +62,10 @@
             
         <p v-if="$magpie.measurements.response === trial.correct1">
             <b>Korrekt!</b> 
-            <br />
             <button @click= "$magpie.saveAndNextScreen();">Weiter</button>
         </p>
         <p v-if="$magpie.measurements.response === trial.correct2">
             <b>Falsch!</b> 
-            <br />
             <button @click= "$magpie.saveAndNextScreen();">Weiter</button>
         </p>
     </Screen>
@@ -120,7 +118,7 @@
   import raw_training_simple from '../trials/training-simple.csv'
   import raw_generalization from '../trials/generalization.csv'
 
-
+  // prepare simple-rule-first-condition
   const training_order_0 = new Array(12).fill(_.shuffle(raw_training_full)).flat();
   const training_order_1_0 = new Array(4).fill(_.shuffle(raw_training_simple)).flat();
   const training_order_1_1 = new Array(10).fill(_.shuffle(raw_training_full)).flat();
@@ -132,23 +130,15 @@
   /* for (let i in repeated) {
     console.log("image nr.", i, "name:", repeated[i].image);
   } */
-  
-  const check = "No";
 
   export default {
     name: 'App',
     components: { LockedChoiceInput },
     data() {
-      if (check == "Yes") { // doesn't work (like this) when working with $magpie.socket :/
-        return {
-          training: training_order_0.slice(0, 8),
-          generalization: _.shuffle(raw_generalization.slice(1, 3))
-        };
-      } else {
-        return {
-          training: training_order_1.slice(0, 8),
-          generalization: _.shuffle(raw_generalization.slice(1, 3))
-        };
+      return {
+        training: training_order_0.slice(0, 8),
+        correct:  _.sample([training_order_0.correct1, training_order_0.correct2]),
+        generalization: _.shuffle(raw_generalization.slice(1, 3))
       }
     },
     methods: {
