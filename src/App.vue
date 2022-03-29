@@ -58,6 +58,7 @@
         <LockedChoiceInput
             :response.sync= "$magpie.measurements.response"
             :options="['A', 'B']"
+            :correct=trial.correct1
             :feedbackTime=-1 /> 
             
         <p v-if="$magpie.measurements.response === trial.correct1">
@@ -120,16 +121,24 @@
 
   // prepare simple-rule-first-condition
   const training_order_0 = new Array(12).fill(_.shuffle(raw_training_full)).flat();
-  const training_order_1_0 = new Array(4).fill(_.shuffle(raw_training_simple)).flat();
-  const training_order_1_1 = new Array(10).fill(_.shuffle(raw_training_full)).flat();
-  const training_order_1 = [training_order_1_0, training_order_1_1].flat();
+
+  const pre_sort_0 = new Array(4).fill(_.shuffle(raw_training_simple)).flat();
+  const pre_sort_1 = new Array(10).fill(_.shuffle(raw_training_full)).flat();
+  const training_order_1 = [pre_sort_0, pre_sort_1].flat();
 
   /* debugging & validation area */
   // console.log("ordered array?", training_order_1)
+
+  var correct = []
+  for (let i in training_order_1) {
+    correct[i] = training_order_1[i].correct1
+  }
+  // console.log(correct)
   
   /* for (let i in repeated) {
     console.log("image nr.", i, "name:", repeated[i].image);
   } */
+
 
   export default {
     name: 'App',
@@ -137,7 +146,7 @@
     data() {
       return {
         training: training_order_0.slice(0, 8),
-        correct:  _.sample([training_order_0.correct1, training_order_0.correct2]),
+        correct:  correct,
         generalization: _.shuffle(raw_generalization.slice(1, 3))
       }
     },

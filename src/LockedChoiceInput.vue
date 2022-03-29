@@ -5,10 +5,10 @@
         class="option"
         v-for="option in options"
         :key="option"
-        :style="{ pointerEvents: compPointer, backgroundColor: compBackground }" 
+        :style="{ pointerEvents: compPointer }" 
         @click="onOptionClick(option); chosen = option"
       >
-        <div :id="option" :style="{ backgroundColor: (chosen === option ? '#1e1e1e20' : '#1e1e1e00') }"> {{ option }} </div>
+        <div :id="option" :style="{ backgroundColor: bgClick(option, correct, chosen) }"> {{ option }} </div>
       </div>
     </div>
   </div>
@@ -29,7 +29,7 @@ export default {
       required: true
     },
     correct: {
-      type: Array,
+      type: String,
       required: true
     }
   },
@@ -41,9 +41,6 @@ export default {
       };
     },
   computed: {
-    compBackground: function() {
-      return this.backgroundColor;
-    },
     compPointer: function() {
       return this.pointerEvents;
     }
@@ -56,6 +53,28 @@ export default {
       this.$emit('update:response', option);
       this.pointerEvents = 'none';
       // this.backgroundColor = 'blue';
+    },
+    bgClick(option, correct, chosen) {
+      // gelb: '#ffd633';
+      // blau: '#3333ff';
+      // console.log("option:", option, "\ncorrect:", correct, "\nchosen:", chosen)
+      // console.log(option === chosen && chosen === correct)
+
+      var coleur = '#1e1e1e00';
+
+      if (chosen == null) {
+        coleur == '#1e1e1e00';
+      } else if (option == chosen && correct != chosen) {
+        coleur = '#3333ff';
+      } else if (option != chosen && correct != chosen) {
+        coleur = '#ffd633';
+      } else if (option == chosen && correct == chosen) {
+        coleur = '#ffd633';
+      }
+      // old logic for testing:
+      // (chosen === option ? '#ffd633' : '#1e1e1e00');
+
+      return this.backgroundColor = coleur;
     }
   }
 };
