@@ -153,7 +153,7 @@
         pictures: raw_generalization.map(task => task.image),
         train_random: training_order_0.slice(0, 2),
         train_sorted: training_order_1.slice(0, 2),
-        generalization: _.shuffle(raw_generalization.slice(0, 2)),
+        generalization: _.shuffle(raw_generalization).slice(0, 2),
         coin: _.sample(['heads', 'tails'])
       }
     },
@@ -172,9 +172,7 @@
           condition: this.$magpie.socket.variant,
           assignment: (coin === 'heads' ? 1 : 2)
         };
-
         const obj = Object.assign({}, arr);
-
         return obj
       }
     }
