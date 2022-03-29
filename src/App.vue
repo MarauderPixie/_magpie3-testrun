@@ -1,5 +1,6 @@
 <template>
-  <Experiment title="UOS - IKW">
+  <Experiment title="Universität Osnabrück - IKW"
+              :image-assets="pictures">
 
     <ConnectInteractiveScreen :title="'Just a second, please.'">
       <p>
@@ -57,7 +58,8 @@
     <Screen 
       v-for="(trial, i) in (thisCond() == 1 || thisCond() == 3 ? train_random : train_sorted)"
       :key="i">
-            
+
+        <Record :data="trial" />  
         <img :src="trial.image" /> 
               
         <!-- evtl. muss ich mir "einfach" (haha) eigene buttons bauen -->
@@ -95,6 +97,7 @@
       v-for="(trial, i) in generalization"
       :key="i">
 
+        <Record :data="trial" />
         <img :src="trial.image" /> 
 
         <XorGeneralization
@@ -103,7 +106,7 @@
             :feedbackTime=-1 /> 
 
         <p v-if="$magpie.measurements.response">
-            <button @click= "$magpie.saveAndNextScreen();">Weiter</button>
+            <button @click= "$magpie.saveAndNextScreen();">Next</button>
         </p>
     </Screen>
 
@@ -145,6 +148,7 @@
     components: { XorTraining, XorGeneralization },
     data() {
       return {
+        pictures: raw_generalization.map(task => task.image),
         train_random: training_order_0.slice(0, 8),
         train_sorted: training_order_1.slice(0, 8),
         generalization: _.shuffle(raw_generalization.slice(0, 8)),
