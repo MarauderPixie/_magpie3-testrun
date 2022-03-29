@@ -68,11 +68,11 @@
             :feedbackTime=-1 /> 
             
         <p v-if="$magpie.measurements.response === trial.correct1">
-            <b>Korrekt!</b> 
+            <b>Correct!</b> 
             <button @click= "$magpie.saveAndNextScreen();">Weiter</button>
         </p>
         <p v-if="$magpie.measurements.response === trial.correct2">
-            <b>Falsch!</b> 
+            <b>Wrong!</b> 
             <button @click= "$magpie.saveAndNextScreen();">Weiter</button>
         </p>
     </Screen>
@@ -80,7 +80,7 @@
 
     <InstructionScreen>
       <!-- no rule-related language -->
-      <div v-if="thisCond() == 1 || thisCond() == 2">
+      <div v-if="thisCond(coin) == 1 || thisCond() == 2">
           <p>For this part of the study, you will again choose the category you think each example belongs to. <br />
           This time you will not receive feedback.</p>
       </div>
@@ -130,7 +130,7 @@
   
   const training_order_0 = new Array(12).fill(_.shuffle(raw_training_random)).flat();
   
-  // prepare simple-rule-first-condition
+  // preparing simple-rule-first-condition
   const pre_sort_0 = new Array(4).fill(_.shuffle(raw_training_sorted)).flat();
   const pre_sort_1 = new Array(10).fill(_.shuffle(raw_training_random)).flat();
   const training_order_1 = [pre_sort_0, pre_sort_1].flat();
@@ -150,8 +150,8 @@
       return {
         train_random: training_order_0.slice(0, 8),
         train_sorted: training_order_1.slice(0, 8),
-        // correct: correct,
-        generalization: _.shuffle(raw_generalization.slice(0, 8))
+        generalization: _.shuffle(raw_generalization.slice(0, 8)),
+        coin: _.sample(['heads', 'tails'])
       }
     },
     methods: {
@@ -159,9 +159,10 @@
         var chain = this.$magpie.socket.chain
         return chain
       },
-      thisCond: function() {
+      thisCond: function(coin) {
         var condition = this.$magpie.socket.variant
         // console.log("This condition:", condition)
+        console.log("Coin:", coin)
         return condition
       }
     }

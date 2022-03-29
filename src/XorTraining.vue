@@ -8,7 +8,11 @@
         :style="{ pointerEvents: compPointer }" 
         @click="onOptionClick(option); chosen = option"
       >
-        <div :id="option" :style="{ backgroundColor: bgClick(option, correct, chosen) }"> {{ option }} </div>
+        <div 
+          :id="option" 
+          :style="{ backgroundColor: bgClick(option, correct, chosen) }"> 
+            {{ option }} 
+        </div>
       </div>
     </div>
   </div>
