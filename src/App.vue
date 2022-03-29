@@ -1,9 +1,14 @@
 <template>
   <Experiment title="UOS - IKW">
 
-    <ConnectInteractiveScreen :title="'sorting into bins...'"></ConnectInteractiveScreen> 
+    <ConnectInteractiveScreen :title="'Just a second, please.'">
+      <p>
+        Preparing the last few bits to carry out the Experiment.<br />
+        Thanks for your patience!
+      </p>
+    </ConnectInteractiveScreen> 
 
-    <Screen>
+    <!-- <Screen>
       <p>Dropping in to see what condition this condition is in:
       <br />
       <b>Variant-Nr.: {{ thisCond() }}</b></p>
@@ -15,7 +20,7 @@
       <button @click="$magpie.saveAndNextScreen();">
         Next
       </button>
-    </Screen>
+    </Screen> -->
     
 
     <!-- INSTRUCTIONS 
