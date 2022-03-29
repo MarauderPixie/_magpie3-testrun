@@ -64,23 +64,23 @@
         <XorTraining
             :response.sync= "$magpie.measurements.response"
             :options="['A', 'B']"
-            :correct=trial.correct1
+            :correct="(coin === 'heads' ? trial.correct1 : trial.correct2)"
             :feedbackTime=-1 /> 
             
-        <p v-if="$magpie.measurements.response === trial.correct1">
+        <p v-if="$magpie.measurements.response === (coin === 'heads' ? trial.correct1 : trial.correct2)">
             <b>Correct!</b> 
-            <button @click= "$magpie.saveAndNextScreen();">Weiter</button>
+            <button @click= "$magpie.saveAndNextScreen();">Next</button>
         </p>
-        <p v-if="$magpie.measurements.response === trial.correct2">
+        <p v-if="$magpie.measurements.response === (coin === 'heads' ? trial.correct2 : trial.correct1)">
             <b>Wrong!</b> 
-            <button @click= "$magpie.saveAndNextScreen();">Weiter</button>
+            <button @click= "$magpie.saveAndNextScreen();">Next</button>
         </p>
     </Screen>
     
 
     <InstructionScreen>
       <!-- no rule-related language -->
-      <div v-if="thisCond(coin) == 1 || thisCond() == 2">
+      <div v-if="thisCond() == 1 || thisCond() == 2">
           <p>For this part of the study, you will again choose the category you think each example belongs to. <br />
           This time you will not receive feedback.</p>
       </div>
@@ -159,10 +159,9 @@
         var chain = this.$magpie.socket.chain
         return chain
       },
-      thisCond: function(coin) {
+      thisCond: function() {
         var condition = this.$magpie.socket.variant
         // console.log("This condition:", condition)
-        console.log("Coin:", coin)
         return condition
       }
     }
