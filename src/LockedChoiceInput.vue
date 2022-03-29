@@ -5,14 +5,10 @@
         class="option"
         v-for="option in options"
         :key="option"
-        v-bind:style="{ pointerEvents: compPointer }" 
-        @click="onOptionClick(option)"
+        :style="{ pointerEvents: compPointer, backgroundColor: compBackground }" 
+        @click="onOptionClick(option); chosen = option"
       >
-        <div
-          @click="bgClick()" v-bind:style="{ backgroundColor: compBackground }" 
-        > 
-          {{ option }} 
-        </div>
+        <span :id="option" :style="{ backgroundColor: (chosen === option ? 'blue' : '#1e1e1e00') }"> {{ option }} </span>
       </div>
     </div>
   </div>
@@ -36,7 +32,8 @@ export default {
   data() {
       return {
         backgroundColor: '',
-        pointerEvents: 'auto'
+        pointerEvents: 'auto',
+        chosen: null
       };
     },
   computed: {
@@ -54,25 +51,13 @@ export default {
        */
       this.$emit('update:response', option);
       this.pointerEvents = 'none';
-    },
-    bgClick() {
-      this.backgroundColor = 'blue';    
+      // this.backgroundColor = 'blue';
     }
   }
 };
 </script>
 
 <style scoped>
-.deactivated {
-    /* background-color: #ffd633 !important; */
-    pointer-events: none;
-}
-
-.activated {
-    /* background-color: #3333ff !important; */
-    pointer-events: auto;
-}
-
 .option {
   background-color: #1e1e1e10;
   border: none;
