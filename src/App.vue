@@ -30,7 +30,7 @@
       <br /> <br />
       We like to remind you that your participation is completely anonymous and voluntary. You may choose to quit the experiment at any moment - simply close the browser tab/window in that case. No data will be stored if you do so. Data storage and submission will only happen at the end of the experiment.
       <br /> <br />
-      This study aims to add to and improve upon the understanding of how humans learn and perform classification tasks. The whole experiment will take approximately 15 minutes to complete. 
+      This study aims to add to and improve upon the understanding of how humans learn and perform classification tasks. The whole experiment will take approximately 10 minutes to complete. 
       <button @click="fs()">Please enable fullscreen mode by clicking this button.</button>
       
       On the next screen you will receive instructions for the experiment. Once again, thanks a lot!
@@ -42,7 +42,7 @@
       <!-- no rule-related language -->
       <div v-if="thisCond() == 1 || thisCond() == 2">
           <p>In this experiment, you will be shown examples of geometric images.
-          Your job is to learn to tell whether each example belongs to the <b>Alpha</b> or <b>Beta</b> category.</p>
+          Your job is to learn to tell whether each example belongs to the <b>A</b> or <b>B</b> category.</p>
           
           <p>As you are shown each example, you will be asked to make a category judgment and then you will recieve feedback.
           At first you will have to guess, but you will gain experience as you go along. </p>
@@ -53,12 +53,12 @@
       <!-- rule-related language -->
       <div v-else>
           <p>In this experiment, you will be shown examples of geometric images.
-          Your job is to learn a rule that allows you to tell whether each example belongs to the <b>Alpha</b> or <b>Beta</b> category.</p>
+          Your job is to learn a rule that allows you to tell whether each example belongs to the <b>A</b> or <b>B</b> category.</p>
 
           <p>As you are shown each example, you will be asked to make a category judgment and then you will recieve feedback.
           At first you will have to guess, but you will gain experience as you go along. </p>
           
-          <p>Try your best to gain mastery of the Alpha and Beta categories.</p>
+          <p>Try your best to gain mastery of the A and B categories.</p>
       </div>
     </InstructionScreen>
 
@@ -122,7 +122,7 @@
     </Screen>
 
     <!-- Demographics & result submission -->
-    <PostTestScreen />
+    <PostTestScreen :gender="false" />
 
     <SubmitResultsScreen />
 
@@ -134,6 +134,7 @@
   import _ from 'lodash'
   import XorTraining from './XorTraining'
   import XorGeneralization from './XorGeneralization'
+  // import Demographics from './Demographics'
   import raw_training_random from '../trials/training-full.csv'
   import raw_training_sorted from '../trials/training-simple.csv'
   import raw_generalization from '../trials/generalization.csv'
@@ -179,7 +180,7 @@
       grpIdent: function(coin) {
         const arr = {
           condition: this.$magpie.socket.variant,
-          assignment: (coin === 'heads' ? 1 : 2)
+          assignment: (coin === 'heads' ? 'correct1' : 'correct2')
         };
         const obj = Object.assign({}, arr);
         return obj
