@@ -4,7 +4,7 @@
 
     <ConnectInteractiveScreen :title="'Just a second, please.'">
       <p>
-        Preparing the last few bits to carry out the Experiment.<br />
+        We are preparing the last few steps to carry out the Experiment.<br />
         Thanks for your patience!
       </p>
     </ConnectInteractiveScreen> 
@@ -24,10 +24,19 @@
     </Screen> -->
     
 
-    <!-- INSTRUCTIONS 
+    <!-- INSTRUCTIONS -->
     <InstructionScreen :title="'Welcome'">
-      Thank you for choosing deutschen Wahn.
-    </InstructionScreen> -->
+      Welcome and thank you a lot for taking part in our research!
+      <br /> <br />
+      We like to remind you that your participation is completely anonymous and voluntary. You may choose to quit the experiment at any moment - simply close the browser tab/window in that case. No data will be stored if you do so. Data storage and submission will only happen at the end of the experiment.
+      <br /> <br />
+      This study aims to add to and improve upon the understanding of how humans learn and perform classification tasks. The whole experiment will take approximately 15 minutes to complete. 
+      <button @click="fs()">Please enable fullscreen mode by clicking this button.</button>
+      
+      On the next screen you will receive instructions for the experiment. Once again, thanks a lot!
+      <br /> <br />
+      To proceed, click the 'Next' button:
+    </InstructionScreen> 
 
     <InstructionScreen :title="'Introduction'"> 
       <!-- no rule-related language -->
@@ -174,6 +183,9 @@
         };
         const obj = Object.assign({}, arr);
         return obj
+      },
+      fs: function() {
+        document.documentElement.requestFullscreen();
       }
     }
   };
