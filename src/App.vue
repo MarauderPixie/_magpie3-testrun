@@ -160,9 +160,9 @@
     data() {
       return {
         pictures: raw_generalization.map(task => task.image),
-        train_random: training_order_0.slice(0, 2),
-        train_sorted: training_order_1.slice(0, 2),
-        generalization: _.shuffle(raw_generalization).slice(0, 2),
+        train_random: training_order_0,
+        train_sorted: training_order_1,
+        generalization: _.shuffle(raw_generalization),
         coin: _.sample(['heads', 'tails'])
       }
     },
