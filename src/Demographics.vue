@@ -74,15 +74,18 @@
         </p>
       </div>
 
-      <button
-        @click="
-          $magpie.addExpData($magpie.measurements);
-          $magpie.nextScreen();
-          fsExit();
-        "
-      >
-        Next
-      </button>
+      <p>
+        By clicking this button, you will exit fullscreen mode and submit your results. 
+        <button
+          @click="
+            $magpie.addExpData($magpie.measurements);
+            $magpie.nextScreen();
+            fsExit();
+          "
+        >
+          Finish Experiment
+        </button>
+      </p>
     </Slide>
   </Screen>
 </template>
