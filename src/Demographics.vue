@@ -48,6 +48,14 @@
             />
           </label>
         </p>
+        <p>
+          <label>
+            Did you partake in a similar experiment before / Are you familiar with similar experiments?
+            <DropdownInput
+              :options="['', 'yes', 'no']"
+              :response.sync="$magpie.measurements.familiar" />
+          </label>
+        </p>
         <!-- @slot You can add additional questions here, storing data in measurements
            @binding {object} measurements a temporary object to store your responses before adding them to the results
            -->
