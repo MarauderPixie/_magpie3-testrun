@@ -8,7 +8,7 @@
         Thanks for your patience!
       </p>
     </ConnectInteractiveScreen> 
-
+    
     <!-- <Screen>
       <p>Dropping in to see what condition this condition is in:
       <br />
@@ -150,20 +150,30 @@
   import raw_generalization from '../trials/generalization.csv'
 
   
-  const training_order_0 = new Array(12).fill(_.shuffle(raw_training_random)).flat();
+  // properly shuffled full-random data
+  var rnd = []
+  for (let i = 0; i < 12; i++) {
+    rnd[i] = _.shuffle(raw_training_random);
+  }
+  const training_order_0 = rnd.flat()
+
+  // properly shuffled simple-rule-first data
+  var ord_start = []
+  var ord_end = []
+  for (let i = 0; i < 4; i++) {
+    ord_start[i] = _.shuffle(raw_training_sorted);
+  }
+  for (let i = 0; i < 10; i++) {
+    ord_end[i] = _.shuffle(raw_training_random);
+  }
+
+  const training_order_1 = [ord_start.flat(), ord_end.flat()].flat()
   
-  // preparing simple-rule-first-condition
-  const pre_sort_0 = new Array(4).fill(_.shuffle(raw_training_sorted)).flat();
-  const pre_sort_1 = new Array(10).fill(_.shuffle(raw_training_random)).flat();
-  const training_order_1 = [pre_sort_0, pre_sort_1].flat();
 
   /* debugging & validation area */
-  // console.log("ordered array?", training_order_1)
-  
   /* for (let i in repeated) {
     console.log("image nr.", i, "name:", repeated[i].image);
   } */
-
 
   export default {
     name: 'App',
@@ -200,5 +210,4 @@
       }
     }
   };
-  
 </script>
