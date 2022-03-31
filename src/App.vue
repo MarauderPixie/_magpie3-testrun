@@ -17,6 +17,16 @@
       <p>Chain-Maker, Space Lord, Mother, Mother:
       <br />
       <b>Chain-Nr.: {{ thisChain() }}</b></p>
+
+      <p>
+          <label
+            >Gender
+            <DropdownInput
+              :options="['', 'male', 'female', 'other']"
+              :response.sync="$magpie.measurements.gender"
+            />
+          </label>
+        </p>
       
       <button @click="$magpie.saveAndNextScreen();">
         Next
@@ -31,7 +41,7 @@
       We like to remind you that your participation is completely anonymous and voluntary. You may choose to quit the experiment at any moment - simply close the browser tab/window in that case. No data will be stored if you do so. Data storage and submission will only happen at the end of the experiment.
       <br /> <br />
       This study aims to add to and improve upon the understanding of how humans learn and perform classification tasks. The whole experiment will take approximately 10 minutes to complete. 
-      <button @click="fs()">Please enable fullscreen mode by clicking this button.</button>
+      <button @click="fsEnter()">Please enable fullscreen mode by clicking this button.</button>
       
       On the next screen you will receive instructions for the experiment. Once again, thanks a lot!
       <br /> <br />
@@ -122,7 +132,7 @@
     </Screen>
 
     <!-- Demographics & result submission -->
-    <PostTestScreen :gender="false" />
+    <Demographics :education=false :gender=false />
 
     <SubmitResultsScreen />
 
@@ -134,7 +144,7 @@
   import _ from 'lodash'
   import XorTraining from './XorTraining'
   import XorGeneralization from './XorGeneralization'
-  // import Demographics from './Demographics'
+  import Demographics from './Demographics'
   import raw_training_random from '../trials/training-full.csv'
   import raw_training_sorted from '../trials/training-simple.csv'
   import raw_generalization from '../trials/generalization.csv'
@@ -157,7 +167,7 @@
 
   export default {
     name: 'App',
-    components: { XorTraining, XorGeneralization },
+    components: { XorTraining, XorGeneralization, Demographics },
     data() {
       return {
         pictures: raw_generalization.map(task => task.image),
@@ -185,7 +195,7 @@
         const obj = Object.assign({}, arr);
         return obj
       },
-      fs: function() {
+      fsEnter: function() {
         document.documentElement.requestFullscreen();
       }
     }
