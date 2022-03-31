@@ -43,14 +43,13 @@
             <input
               v-model="$magpie.measurements.languages"
               type="text"
-              style="{ width: 200px }"
-              placeholder="the language(s) spoken at home when you were a child"
+              placeholder="Java, C++, ..."
             />
           </label>
         </p>
         <p>
           <label>
-            Did you partake in a similar experiment before / Are you familiar with similar experiments?
+            Did you participate in a similar experiment before?
             <DropdownInput
               :options="['', 'yes', 'no']"
               :response.sync="$magpie.measurements.familiar" />
