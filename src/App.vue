@@ -3,10 +3,12 @@
               :image-assets="pictures">
 
     <ConnectInteractiveScreen :title="'Just a second, please.'">
-      <p>
-        We are preparing the last few steps to carry out the Experiment.<br />
-        Thanks for your patience!
-      </p>
+      <p>We are preparing the last few steps to carry out the Experiment.</p>
+      <br />
+      <div class="bouncy"></div>
+      <br />
+      <p>Thanks for your patience!</p>
+      
     </ConnectInteractiveScreen> 
     
     <!-- <Screen>
@@ -79,7 +81,6 @@
       :key="i">
 
         <Record :data="trial" />  
-        <!-- <Record :data="{...[coin]}" /> -->
         <Record :data="grpIdent(coin)" :global=true />
         <img :src="trial.image" /> 
               
@@ -211,3 +212,21 @@
     }
   };
 </script>
+<style scoped>
+.bouncy {
+  width: 20px;
+  height: 20px;
+  background-color: yellow;
+  position: relative;
+  animation-name: moove;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease;
+}
+
+@keyframes moove {
+  0%    {background-color:#5187ba; left:0px;}
+  50%   {background-color:#2696ff; left:600px; transform: rotate(300deg);}
+  100%  {background-color:#5187ba; left:0px;}
+}
+</style>
