@@ -225,8 +225,8 @@
 }
 
 @keyframes moove {
-  0%    {background-color:#5187ba; left:0px;}
-  50%   {background-color:#2696ff; left:600px; transform: rotate(300deg);}
-  100%  {background-color:#5187ba; left:0px;}
+  0%    {background-color:#5187ba; left:200px;}
+  50%   {background-color:#2696ff; left:700px; transform: rotate(300deg);}
+  100%  {background-color:#5187ba; left:200px;}
 }
 </style>
