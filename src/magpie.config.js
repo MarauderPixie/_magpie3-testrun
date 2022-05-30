@@ -7,5 +7,5 @@ export default {
   contactEmail: 'test@random.com',
   // Either 'debug', 'directLink' or 'prolific'
   mode: 'directLink',
-  language: 'en'
+  language: 'de'
 };

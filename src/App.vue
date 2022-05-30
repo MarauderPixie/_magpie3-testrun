@@ -38,6 +38,7 @@
 
     <!-- INSTRUCTIONS -->
     <InstructionScreen :title="'Welcome'">
+      <!-- English Version:
       Welcome and thank you a lot for taking part in our research!
       <br /> <br />
       We like to remind you that your participation is completely anonymous and voluntary. You may choose to quit the experiment at any moment - simply close the browser tab/window in that case. No data will be stored if you do so. Data storage and submission will only happen at the end of the experiment.
@@ -47,7 +48,17 @@
       
       On the next screen you will receive instructions for the experiment. Once again, thanks a lot!
       <br /> <br />
-      To proceed, click the 'Next' button:
+      To proceed, click the 'Next' button: -->
+      Willkommen und vielen Dank für die Teilnahme an dieser Studie!
+      <br /><br />
+      Die Teilnahme erfolgt selbstverständlich vollkommen anonym und freiwillig. Das Experiment kann jederzeit unter- bzw. abgebrochen werden; dazu genügt es, einfach den Browser-Tab bzw. Fenster zu schließen. In diesem Fall werden keine Daten gespeichert. Datenspeicherung und -übertragung passieren erst ganz zum Schluss des Experiments.
+      <br /><br />
+      Das Ziel dieses Projekts ist, etwas darüber herauszufinden, wie Klassifikationsaufgaben von Menschen erlernt und ausgeführt werden. Insgesamt wird die Dauer der Teilnahme etwa 10 Minuten in Anspruch nehmen.
+      <button @click="fsEnter()">Bitte diesen Knopf klicken, um in den Vollbild-Modus zu wechseln.</button>
+
+      Auf der nächsten Seite befinden sich die Anweisungen für das Experiment. Nochmals vielen Dank!
+      <br /><br />
+      Auf 'weiter' klicken, um fortzufahren.
     </InstructionScreen> 
 
     <InstructionScreen :title="'Introduction'"> 
