@@ -1,14 +1,13 @@
 <template>
-  <Screen v-bind="$attrs" title="Additional information">
+  <Screen v-bind="$attrs" title="Weitere Angaben">
     <Slide>
       <p>
-        Answering the following questions is optional, but your answers will
-        help us analyze our results.
+        Die folgenden Fragen zu beantworten ist völlig optional, wird uns jedoch bei der Analyse unserer Ergebnisse weiterhelfen.
       </p>
-      <div style="text-align: left; width: 400px; margin: 0 auto">
+      <div style="text-align: center; width: auto; margin: 0 auto">
         <p v-if="age">
           <label>
-            Your Age: 
+            Dein Alter (in Jahren): 
             <input
               v-model="$magpie.measurements.age"
               type="number"
@@ -39,7 +38,7 @@
         </p>
         <p v-if="languages">
           <label>
-            Native languages:
+            Muttersprache(n):
             <input
               v-model="$magpie.measurements.languages"
               type="text"
@@ -47,45 +46,52 @@
             />
           </label>
         </p>
-        <p>
-          <label>
-            Did you participate in a similar experiment before?
-            <DropdownInput
-              :options="['', 'yes', 'no']"
-              :response.sync="$magpie.measurements.familiar" />
-          </label>
-        </p>
+        <hr>
         <!-- @slot You can add additional questions here, storing data in measurements
            @binding {object} measurements a temporary object to store your responses before adding them to the results
            -->
         <slot :measurements="$magpie.measurements" />
         <p>
-          Please try to tell us how you categorized the shapes:
+          Beschreibe bitte die Regel oder Strategie, nach der du zur Kategorisierung vorgegangen bist:
           <TextareaInput
             :response.sync="$magpie.measurements.strategy"
           />
         </p>
         <hr>
         <p>
-          If you have any furter comments, feel free to tell us:
+          <label>
+            Gibt es einen Grund, weswegen wir deine Daten nicht auswerten sollten? (z.B. Ablenkungen, Unterbrechungen, Ernsthaftigkeit...) 
+            <MultipleChoiceInput
+              :options="['yes', 'no']"
+              orientation="horizontal"
+              :response.sync="$magpie.measurements.usage" />
+          </label>
+          Bitte sei ehrlich! 'Ja' anzukreuzen hat keinerlei negative Auswirkungen für dich (du erhältst zB trotzdem Probandenstunden), aber hilft uns dafür, zuverlässige Daten zu sammeln!
+        </p>
+        <hr>
+        <p>
+          Hast du noch weitere Anmerkungen? Wir freuen uns über jedes Feedback!
           <TextareaInput
             :response.sync="$magpie.measurements.comments"
           />
         </p>
       </div>
 
-      <p>
-        By clicking this button, you will exit fullscreen mode and submit your results. 
-        <button
-          @click="
-            $magpie.addExpData($magpie.measurements);
-            $magpie.nextScreen();
-            fsExit();
-          "
-        >
-          Finish Experiment
-        </button>
-      </p>
+      <div>
+        <hr>
+        <p>
+          Wenn du auf den Knopf klickst, beendest du das Experiment - der Vollbildmodus wird verlassen und deine Daten übermittelt.
+          <button
+            @click="
+              $magpie.addExpData($magpie.measurements);
+              $magpie.nextScreen();
+              fsExit();
+            "
+          >
+            Beenden & Absenden
+          </button>
+        </p>
+      </div>
     </Slide>
   </Screen>
 </template>
