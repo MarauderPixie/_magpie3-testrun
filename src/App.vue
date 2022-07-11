@@ -2,54 +2,19 @@
   <Experiment title="Universität Osnabrück - IKW"
               :image-assets="pictures">
 
-    <ConnectInteractiveScreen :title="'Just a second, please.'">
-      <p>We are preparing the last few steps to carry out the Experiment.</p>
+    <ConnectInteractiveScreen :title="'Einen Augenblick, bitte.'">
+      <p>Es fehlen noch ein paar kleine Schritte zur Vorbereitung des Experiments.</p>
       <br />
       <div class="bouncy"></div>
       <br />
-      <p>Thanks for your patience!</p>
+      <p>Danke für die Geduld!</p>
       
     </ConnectInteractiveScreen> 
     
-    <!-- <Screen>
-      <p>Dropping in to see what condition this condition is in:
-      <br />
-      <b>Variant-Nr.: {{ thisCond() }}</b></p>
-
-      <p>Chain-Maker, Space Lord, Mother, Mother:
-      <br />
-      <b>Chain-Nr.: {{ thisChain() }}</b></p>
-
-      <p>
-          <label
-            >Gender
-            <DropdownInput
-              :options="['', 'male', 'female', 'other']"
-              :response.sync="$magpie.measurements.gender"
-            />
-          </label>
-        </p>
-      
-      <button @click="$magpie.saveAndNextScreen();">
-        Next
-      </button>
-    </Screen> -->
-    
 
     <!-- INSTRUCTIONS -->
-    <InstructionScreen :title="'Welcome'">
-      <!-- English Version:
-      Welcome and thank you a lot for taking part in our research!
-      <br /> <br />
-      We like to remind you that your participation is completely anonymous and voluntary. You may choose to quit the experiment at any moment - simply close the browser tab/window in that case. No data will be stored if you do so. Data storage and submission will only happen at the end of the experiment.
-      <br /> <br />
-      This study aims to add to and improve upon the understanding of how humans learn and perform classification tasks. The whole experiment will take approximately 10 minutes to complete. 
-      <button @click="fsEnter()">Please enable fullscreen mode by clicking this button.</button>
-      
-      On the next screen you will receive instructions for the experiment. Once again, thanks a lot!
-      <br /> <br />
-      To proceed, click the 'Next' button: -->
-      Willkommen und vielen Dank für die Teilnahme an dieser Studie!
+    <InstructionScreen :title="'Willkommen'">
+      Vielen Dank für die Teilnahme an dieser Studie!
       <br /><br />
       Die Teilnahme erfolgt selbstverständlich vollkommen anonym und freiwillig. Das Experiment kann jederzeit unter- bzw. abgebrochen werden; dazu genügt es, einfach den Browser-Tab bzw. Fenster zu schließen. In diesem Fall werden keine Daten gespeichert. Datenspeicherung und -übertragung passieren erst ganz zum Schluss des Experiments.
       <br /><br />
@@ -103,8 +68,8 @@
             :feedbackTime=-1 /> 
             
         <p v-if="$magpie.measurements.response">
-            <span v-if="$magpie.measurements.response === (coin === 'heads' ? trial.correct1 : trial.correct2)"><b>Correct!</b></span> 
-            <span v-else><b>Wrong!</b></span>
+            <span v-if="$magpie.measurements.response === (coin === 'heads' ? trial.correct1 : trial.correct2)"><b>Korrekt!</b></span> 
+            <span v-else><b>Falsch</b></span>
             <button @click= "$magpie.saveAndNextScreen();">Next</button>
         </p>
     </Screen>
@@ -143,6 +108,27 @@
         </p>
     </Screen>
 
+    <!-- PROBABILITY TRIALS -->
+    <Screen 
+      v-for="(trial, i) in probability"
+      :key="i">
+
+        <Record :data="trial" />
+        <img :src="trial.image" /> 
+        
+        <XorProbability
+          :response.sync= "$magpie.measurements.prob"
+          :initial=50 
+          option-left="A"
+          option-right="B"/>
+          
+        <div v-if="typeof $magpie.measurements.prob === 'number'">
+          <button @click= "$magpie.saveAndNextScreen();">
+            Weiter
+          </button>
+        </div>
+    </Screen>
+
     <!-- Demographics & result submission -->
     <Demographics :education=false :gender=false />
 
@@ -156,6 +142,7 @@
   import _ from 'lodash'
   import XorTraining from './XorTraining'
   import XorGeneralization from './XorGeneralization'
+  import XorProbability from './XorProbability'
   import Demographics from './Demographics'
   import raw_training_random from '../trials/training-full.csv'
   import raw_training_sorted from '../trials/training-simple.csv'
@@ -189,13 +176,14 @@
 
   export default {
     name: 'App',
-    components: { XorTraining, XorGeneralization, Demographics },
+    components: { XorTraining, XorGeneralization, XorProbability, Demographics },
     data() {
       return {
         pictures: raw_generalization.map(task => task.image),
         train_random: training_order_0,
         train_sorted: training_order_1,
         generalization: _.shuffle(raw_generalization),
+        probability: _.shuffle(raw_generalization),
         coin: _.sample(['heads', 'tails'])
       }
     },
