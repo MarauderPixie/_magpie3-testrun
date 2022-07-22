@@ -3,26 +3,52 @@
               :image-assets="pictures">
 
     <!-- PROBABILITY TRIALS -->
-    <Screen 
-      v-for="(trial, i) in probability"
-      :key="i">
+    <InstructionScreen>
+      <!-- no rule-related language -->
+      <div v-if="thisCond() == 1 || thisCond() == 2">
+        <p>For this part of the study, you will again choose the category you think each example belongs to. Nun zum letzten Abschnitt der Studie. Wir möchten gerne wissen, wie hoch du die Wahrscheinlichkeit einschätzt, dass das gezeigte Beispiel zu einer der beiden Kategorien gehört:
 
-        <Record :data="trial" />
-        <img :src="trial.image" /> 
-
-        <!-- <XorProbability
-            :response.sync= "$magpie.measurements.response"
-            :options="['A', 'B']"
-            :feedbackTime=-1 /> -->
         <XorProbability
           :response.sync= "$magpie.measurements.prob"
           :initial=50 
           option-left="A"
           option-right="B"/>
 
+        This time you will not receive feedback. </p>
+      </div>
+
+      <!-- rule-related language -->
+      <div v-else>
+          <p>Nun zum letzten Abschnitt der Studie. Wir möchten gerne wissen, wie hoch du die Wahrscheinlichkeit einschätzt, dass das gezeigte Beispiel zu einer der beiden Kategorien gehört, wenn du die zuvor gelernte Regel anwendest:</p>
+
+          <XorProbability
+            :response.sync= "$magpie.measurements.prob"
+            :initial=50 
+            option-left="A"
+            option-right="B"/>
+
+          <p>Bla.</p>
+      </div>
+    </InstructionScreen>
+
+    <!-- PROBABILITY TRIALS -->
+    <Screen 
+      v-for="(trial, i) in probability"
+      :key="i">
+
+        <Record :data="trial" />
+        <img :src="trial.image" /> 
+        
+        <XorProbability
+          :response.sync= "$magpie.measurements.prob"
+          :initial=50 
+          option-left="A"
+          option-right="B" />
           
         <div v-if="typeof $magpie.measurements.prob === 'number'">
-            <button @click= "$magpie.saveAndNextScreen();">Weiter</button>
+          <button @click= "$magpie.saveAndNextScreen();">
+            Weiter
+          </button>
         </div>
     </Screen>
 
@@ -39,28 +65,34 @@
   import _ from 'lodash'
   import XorTraining from './XorTraining'
   import XorGeneralization from './XorGeneralization'
-  import XorProbability from './XorProbNeu'
+  import XorProbability from './XorProbability'
   import Demographics from './Demographics'
-  import raw_training_random from '../trials/training-full.csv'
-  import raw_training_sorted from '../trials/training-simple.csv'
-  import raw_generalization from '../trials/generalization.csv'
+  import raw_training_mixed from '../trials/training-mixed.csv'
+  import raw_training_blocked_size from '../trials/training-blocked-size.csv'
+  import raw_training_blocked_shape from '../trials/training-blocked-shape.csv'
+  import raw_generalization from '../trials/transfer.csv'
 
   
   // properly shuffled full-random data
   var rnd = []
   for (let i = 0; i < 12; i++) {
-    rnd[i] = _.shuffle(raw_training_random);
+    rnd[i] = _.shuffle(raw_training_mixed);
   }
   const training_order_0 = rnd.flat()
 
   // properly shuffled simple-rule-first data
+  var shapesize = _.sample(['shape', 'size']);
   var ord_start = []
   var ord_end = []
   for (let i = 0; i < 4; i++) {
-    ord_start[i] = _.shuffle(raw_training_sorted);
+    if (shapesize == 'size') {
+      ord_start[i] = _.shuffle(raw_training_blocked_size);
+    } else {
+      ord_start[i] = _.shuffle(raw_training_blocked_shape);
+    }
   }
   for (let i = 0; i < 10; i++) {
-    ord_end[i] = _.shuffle(raw_training_random);
+    ord_end[i] = _.shuffle(raw_training_mixed);
   }
 
   const training_order_1 = [ord_start.flat(), ord_end.flat()].flat()

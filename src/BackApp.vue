@@ -21,13 +21,13 @@
       Das Ziel dieses Projekts ist, etwas darüber herauszufinden, wie Klassifikationsaufgaben von Menschen erlernt und ausgeführt werden. Insgesamt wird die Dauer der Teilnahme etwa 10 Minuten in Anspruch nehmen.
       <button @click="fsEnter()">Bitte diesen Knopf klicken, um in den Vollbild-Modus zu wechseln.</button>
 
-      Auf der nächsten Seite befinden sich die Anweisungen für das Experiment.
-      <br />
-      <p style="text-align: center">Auf 'weiter' klicken, um fortzufahren.</p>
-    </InstructionScreen>
+      Auf der nächsten Seite befinden sich die Anweisungen für das Experiment. Nochmals vielen Dank!
+      <br /><br />
+      Auf 'weiter' klicken, um fortzufahren.
+    </InstructionScreen> 
 
-    <InstructionScreen>
-      <!-- no rule instructions -->
+    <InstructionScreen :title="'Einleitung'"> 
+      <!-- no rule-related language -->
       <div v-if="thisCond() == 1 || thisCond() == 2">
           <p>In this experiment, you will be shown examples of geometric images.
           Your job is to learn to tell whether each example belongs to the <b>A</b> or <b>B</b> category.</p>
@@ -112,15 +112,14 @@
     <InstructionScreen>
       <!-- no rule-related language -->
       <div v-if="thisCond() == 1 || thisCond() == 2">
-        <p>Nun zum letzten Abschnitt der Studie. In diesem Durchgang möchten wir gerne wissen, wie hoch du die Wahrscheinlichkeit einschätzt, dass das gezeigte Beispiel zu einer der beiden Kategorien gehört. Verschiebe dazu den Regler in die jeweilige Richtung:
+          <p>For this part of the study, you will again choose the category you think each example belongs to. Nun zum letzten Abschnitt der Studie. In diesem Durchgang möchten wir gerne wissen, wie hoch du die Wahrscheinlichkeit einschätzt, dass das gezeigte Beispiel zu einer der beiden Kategorien gehört:</p>
 
-        <XorProbability
-          :response.sync= "$magpie.measurements.prob"
-          :initial=50 
-          option-left="A"
-          option-right="B"/>
+          <XorGeneralization
+            :response.sync= "$magpie.measurements.response"
+            :options="['A', 'B']"
+            :feedbackTime=-1 /> 
 
-        This time you will not receive feedback. </p>
+          <p>This time you will not receive feedback. </p>
       </div>
 
       <!-- rule-related language -->
@@ -167,32 +166,26 @@
   import XorGeneralization from './XorGeneralization'
   import XorProbability from './XorProbability'
   import Demographics from './Demographics'
-  import raw_training_mixed from '../trials/training-mixed.csv'
-  import raw_training_blocked_size from '../trials/training-blocked-size.csv'
-  import raw_training_blocked_shape from '../trials/training-blocked-shape.csv'
-  import raw_generalization from '../trials/transfer.csv'
+  import raw_training_random from '../trials/training-full.csv'
+  import raw_training_sorted from '../trials/training-simple.csv'
+  import raw_generalization from '../trials/generalization.csv'
 
   
   // properly shuffled full-random data
   var rnd = []
   for (let i = 0; i < 12; i++) {
-    rnd[i] = _.shuffle(raw_training_mixed);
+    rnd[i] = _.shuffle(raw_training_random);
   }
   const training_order_0 = rnd.flat()
 
   // properly shuffled simple-rule-first data
-  var shapesize = _.sample(['shape', 'size']);
   var ord_start = []
   var ord_end = []
   for (let i = 0; i < 4; i++) {
-    if (shapesize == 'size') {
-      ord_start[i] = _.shuffle(raw_training_blocked_size);
-    } else {
-      ord_start[i] = _.shuffle(raw_training_blocked_shape);
-    }
+    ord_start[i] = _.shuffle(raw_training_sorted);
   }
   for (let i = 0; i < 10; i++) {
-    ord_end[i] = _.shuffle(raw_training_mixed);
+    ord_end[i] = _.shuffle(raw_training_random);
   }
 
   const training_order_1 = [ord_start.flat(), ord_end.flat()].flat()

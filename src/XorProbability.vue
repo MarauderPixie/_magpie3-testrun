@@ -98,7 +98,10 @@ export default {
 .slider-element .left,
 .slider-element .right {
   flex-grow: 0;
-  padding: 0 20px;
+  padding: 0 10px;
+  text-align: center;
+  height: 50px;
+  width: 60px;
 }
 
 .slider {

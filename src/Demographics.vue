@@ -52,7 +52,7 @@
            -->
         <slot :measurements="$magpie.measurements" />
         <p>
-          Beschreibe bitte die Regel oder Strategie, nach der du zur Kategorisierung vorgegangen bist:
+          Beschreibe bitte, wie du bei der Kategorisierung vorgegangen bist:
           <TextareaInput
             :response.sync="$magpie.measurements.strategy"
           />
@@ -60,9 +60,9 @@
         <hr>
         <p>
           <label>
-            Gibt es einen Grund, weswegen wir deine Daten nicht auswerten sollten? (z.B. Ablenkungen, Unterbrechungen, Ernsthaftigkeit...) 
+            Gibt es einen Grund, weswegen wir deine Daten nicht auswerten sollten? (z.B. Ablenkungen, Unterbrechungen, Ernsthaftigkeit, Lärm, etc...) 
             <MultipleChoiceInput
-              :options="['yes', 'no']"
+              :options="['Ja (nicht auswerten)', 'Nein (alles gut)']"
               orientation="horizontal"
               :response.sync="$magpie.measurements.usage" />
           </label>
