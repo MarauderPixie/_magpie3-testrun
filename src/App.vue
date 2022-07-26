@@ -12,41 +12,43 @@
     </ConnectInteractiveScreen> 
     
 
-    <!-- INSTRUCTIONS -->
+    <!-- INSTRUCTIONS 
+    <Demographics :education=true :gender=false /> -->
     <InstructionScreen :title="'Willkommen'">
-      Vielen Dank für die Teilnahme an dieser Studie!
-      <br /><br />
-      Die Teilnahme erfolgt selbstverständlich vollkommen anonym und freiwillig. Das Experiment kann jederzeit unter- bzw. abgebrochen werden; dazu genügt es, einfach den Browser-Tab bzw. das Fenster zu schließen. In diesem Fall werden keine Daten gespeichert. Datenspeicherung und -übertragung passieren erst ganz zum Schluss des Experiments.
-      <br /><br />
-      Das Ziel dieses Projekts ist, etwas darüber herauszufinden, wie Klassifikationsaufgaben von Menschen erlernt und ausgeführt werden. Insgesamt wird die Dauer der Teilnahme etwa 10 Minuten in Anspruch nehmen.
-      <button @click="fsEnter()">Bitte diesen Knopf klicken, um in den Vollbild-Modus zu wechseln.</button>
-
-      Auf der nächsten Seite befinden sich die Anweisungen für das Experiment.
-      <br />
-      <p style="text-align: center">Auf 'weiter' klicken, um fortzufahren.</p>
+      <p>Vielen Dank für die Teilnahme an dieser Studie!</p>
+      <p>Das Ziel dieses Projekts ist, etwas darüber herauszufinden, wie Klassifikationsaufgaben von Menschen erlernt und ausgeführt werden. Insgesamt wird die Teilnahme etwa 10 bis 15 Minuten in Anspruch nehmen.</p>
+      <p>Die Teilnahme erfolgt vollkommen anonym und freiwillig. Das Experiment kann jederzeit abgebrochen werden; dazu genügt es, den Browser-Tab bzw. das Fenster zu schließen. In diesem Fall werden keine Daten gespeichert. Datenspeicherung und -übertragung finden erst am Ende des Experiments statt.</p>
+      <button @click="fsEnter()" style="width: 60%;">Bitte diesen Button klicken, um in den Vollbild-Modus zu wechseln.</button>
+      
+      <p>Mit dem Klick auf den "Weiter"-Button erkläre ich, dass
+        <ol>
+          <li>Ich einverstanden bin, dass meine Daten anonymisiert auf der Plattform Open Science Framework (osf.io) veröffentlicht werden und im Rahmen von wissenschaftlichen Publikationen (z.B. Vorträge, Veröffentlichung in Fachzeitschriften) verwendet werden. Bitte beachten Sie, dass Sie eine Löschung Ihrer Daten im Nachhinein nicht mehr veranlassen können, da die Daten nur in anonymisierter Form gespeichert werden.</li>
+          <li>Ich freiwillig teilnehme und weiß, dass ich die Studie jederzeit ohne Angabe von Gründen abbrechen kann ohne dass mir daraus Nachteile entstehen. In diesem Fall werden keine Daten gespeichert.</li>
+          <li>Ich ausreichend über die Studie aufgeklärt wurde.</li>
+        </ol>
+      Weitere Fragen können per Email an tanton@uni-osnabrueck.de gerichtet werden.</p>
+      <p style="text-align: center">Auf 'weiter' klicken, um mit dem Experiment zu beginnen.</p>
     </InstructionScreen>
 
     <InstructionScreen>
       <!-- no rule instructions -->
       <div v-if="thisCond() == 1 || thisCond() == 2">
-          <p>In this experiment, you will be shown examples of geometric images.
-          Your job is to learn to tell whether each example belongs to the <b>A</b> or <b>B</b> category.</p>
-          
-          <p>As you are shown each example, you will be asked to make a category judgment and then you will recieve feedback.
-          At first you will have to guess, but you will gain experience as you go along. </p>
-          
-          <p>After you have completed your training, we will ask you a series of test questions about what you have learned.</p>
+          <p>Im ersten Abschnitt des Experiments werden dir einige Beispiele geometrischer Figuren gezeigt.
+            Deine Aufgabe ist es, zu erlernen, ob eine Figur zu Kategorie <b>A</b> oder Kategorie <b>B</b> gehört.</p>
+          <p>Tippe oder klicke dazu bitte bei jedem Beispiel, das dir gezeigt wird, auf den entsprechenden Knopf. 
+            Nach jeder Entscheidung bekommst du eine Rückmeldung darüber, ob deine Wahl richtig oder falsch war.
+            Am Anfang musst du raten, letztendlich aber wirst du lernen, wie man die Objekte richtig kategorisiert.</p>
+          <p>Gib dein Bestes, um die Kategorien A und B zu meistern!</p>
       </div>
 
       <!-- rule-related language -->
       <div v-else>
-          <p>In this experiment, you will be shown examples of geometric images.
-          Your job is to learn a rule that allows you to tell whether each example belongs to the <b>A</b> or <b>B</b> category.</p>
-
-          <p>As you are shown each example, you will be asked to make a category judgment and then you will recieve feedback.
-          At first you will have to guess, but you will gain experience as you go along. </p>
-          
-          <p>Try your best to gain mastery of the A and B categories.</p>
+          <p>Im ersten Abschnitt des Experiments werden dir einige Beispiele geometrischer Figuren gezeigt.
+            Deine Aufgabe ist es, eine Regel zu erlernen, anhand derer Du entscheiden kannst, ob eine Figur zu Kategorie <b>A</b> oder Kategorie <b>B</b> gehört.</p>
+          <p>Tippe oder klicke dazu bitte bei jedem Beispiel, das dir gezeigt wird, auf den entsprechenden Knopf. 
+            Nach jeder Entscheidung bekommst du eine Rückmeldung darüber, ob deine Wahl richtig oder falsch war.
+            Am Anfang musst du raten, letztendlich aber wirst du lernen, wie man die Objekte richtig kategorisiert.</p>
+          <p>Gib dein Bestes, um die Regeln für Kategorien A und B zu meistern!</p>
       </div>
     </InstructionScreen>
 
@@ -78,19 +80,19 @@
     <InstructionScreen>
       <!-- no rule-related language -->
       <div v-if="thisCond() == 1 || thisCond() == 2">
-          <p>For this part of the study, you will again choose the category you think each example belongs to. <br />
-          This time you will not receive feedback.</p>
+          <p>Entscheide im nächsten Abschnitt weiterhin, zu welcher Kategorie jedes gezeigte Beispiel deiner Meinung nach gehört.<br />
+            Dieses mal wirst du keine Rückmeldung erhalten.</p>
       </div>
 
       <!-- rule-related language -->
       <div v-else>
-          <p>For this part of the study, you will again apply the rule you learned to choose the category you think each example belongs to. <br />
-          This time you will not receive feedback.</p>
+          <p>Wende im nächsten Abschnitt die Regel an, die du gelernt hast, um zu entscheiden, zu welcher Kategorie jedes gezeigte Beispiel deiner Meinung nach gehört.<br />
+            Dieses mal wirst du keine Rückmeldung erhalten.</p>
       </div>
     </InstructionScreen>
 
 
-    <!-- GENERALIZATION TRIALS -->
+    <!-- TRANSFER TRIALS -->
     <Screen 
       v-for="(trial, i) in generalization"
       :key="i">
@@ -112,21 +114,24 @@
     <InstructionScreen>
       <!-- no rule-related language -->
       <div v-if="thisCond() == 1 || thisCond() == 2">
-        <p>Nun zum letzten Abschnitt der Studie. In diesem Durchgang möchten wir gerne wissen, wie hoch du die Wahrscheinlichkeit einschätzt, dass das gezeigte Beispiel zu einer der beiden Kategorien gehört. Verschiebe dazu den Regler in die jeweilige Richtung:
+        <p>Nun zum letzten Abschnitt der Studie. In diesem Durchgang möchten wir gerne wissen, wie hoch du die Wahrscheinlichkeit einschätzt, dass das gezeigte Beispiel zu einer der beiden Kategorien gehört. Verschiebe dazu den Regler in die jeweilige Richtung: </p>
 
         <XorProbability
           :response.sync= "$magpie.measurements.prob"
           :initial=50 
           option-left="A"
           option-right="B"/>
-
-        This time you will not receive feedback. </p>
       </div>
 
       <!-- rule-related language -->
       <div v-else>
-          <p>For this part of the study, you will again apply the rule you learned to choose the category you think each example belongs to. <br />
-          This time you will not receive feedback.</p>
+        <p>Nun zum letzten Abschnitt der Studie. In diesem Durchgang möchten wir gerne wissen, wie hoch du die Wahrscheinlichkeit einschätzt, dass das gezeigte Beispiel zu einer der beiden Kategorien gehört, wenn du die gelernte Regel anwendest. Verschiebe dazu den Regler in die jeweilige Richtung:</p>
+
+        <XorProbability
+          :response.sync= "$magpie.measurements.prob"
+          :initial=50 
+          option-left="A"
+          option-right="B"/>
       </div>
     </InstructionScreen>
 
