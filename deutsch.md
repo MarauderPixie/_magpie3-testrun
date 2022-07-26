@@ -1,14 +1,14 @@
 # Welcome Page / Instructions 1
-Willkommen und vielen Dank für die Teilnahme an dieser Forschung!
-<br /><br />
-Diese Teilnahme ist selbstverständlich vollkommen anonym und freiwillig. Das Experiment kann jederzeit unter- bzw. abgebrochen werden - dazu genügt es, einfach den Browser-Tab bzw. Fenster zu schließen. In dem Fall werden keine Daten gespeichert. Datenspeicherung und -übertragung passieren erst ganz zum Schluss des Experiments.
-<br /><br />
-Diese Studie hat zum Ziel, zum Verständnis beizutragen, wie Klassifikationsaufgaben von Menschen erlernt und ausgeführt werden. Insgesamt wird die Dauer der Teilnahme etwa 10 Minuten in Anspruch nehmen.
-<button @click="fsEnter()">Bitte diesen Knopf klicken, um in den Vollbild-Modus zu wechseln.</button>
+Vielen Dank für die Teilnahme an dieser Studie!
+      <br /><br />
+      Die Teilnahme erfolgt vollkommen anonym und freiwillig. Das Experiment kann jederzeit unter- bzw. abgebrochen werden; dazu genügt es, den Browser-Tab bzw. das Fenster zu schließen. In diesem Fall werden keine Daten gespeichert. Datenspeicherung und -übertragung finden erst ganz zum Schluss des Experiments statt.
+      <br /><br />
+      Das Ziel dieses Projekts ist, etwas darüber herauszufinden, wie Klassifikationsaufgaben von Menschen erlernt und ausgeführt werden. Insgesamt wird die Dauer der Teilnahme etwa 10 bis 15 Minuten in Anspruch nehmen.
+      <button @click="fsEnter()">Bitte diesen Knopf klicken, um in den Vollbild-Modus zu wechseln.</button>
 
-Auf der nächsten Seite befinden sich die Anweisungen für das Experiment. Nochmals vielen Dank!
-<br /><br />
-Auf 'weiter' klicken, um fortzufahren.
+      Auf der nächsten Seite befinden sich die Anweisungen für das Experiment.
+      <br />
+      <p style="text-align: center">Auf 'weiter' klicken, um fortzufahren.</p>
 
 
 # No Rule Instructions
