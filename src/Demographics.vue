@@ -2,7 +2,7 @@
   <Screen v-bind="$attrs" title="Weitere Angaben">
     <Slide>
       <p>
-        Die folgenden Fragen zu beantworten ist völlig optional, wird uns jedoch bei der Analyse unserer Ergebnisse weiterhelfen.
+        Die folgenden Fragen zu beantworten ist völlig optional, wird uns jedoch bei der Analyse der Ergebnisse weiterhelfen.
       </p>
       <div style="text-align: center; width: auto; margin: 0 auto">
         <p v-if="age">
@@ -24,13 +24,19 @@
         </p>
         <p v-if="education">
           <label
-            >Level of Education
+            >Dein höchster Bildungsabschluss:
             <DropdownInput
+              orientation="horizontal"
               :options="[
-                '',
-                'Graduated High-school',
-                'Graduated College',
-                'Higher degree'
+                '(keine Angabe)',
+                'kein Abschluss',
+                'Haupt- oder Volksschule',
+                'Realschule / mittlere Reife',
+                '(Fach-)Gymnasium / Abitur',
+                'Berufsausbildung',
+                'Hochschule (Bachelor, Vordiplom)',
+                'Hochschule (Master, Diplom)',
+                'Promotion'
               ]"
               :response.sync="$magpie.measurements.education"
             />
@@ -42,7 +48,7 @@
             <input
               v-model="$magpie.measurements.languages"
               type="text"
-              placeholder="Java, C++, ..."
+              placeholder="deutsch, englisch, latein..."
             />
           </label>
         </p>
@@ -52,7 +58,7 @@
            -->
         <slot :measurements="$magpie.measurements" />
         <p>
-          Beschreibe bitte, wie du bei der Kategorisierung vorgegangen bist:
+          <b>Beschreibe bitte, wie du bei der Kategorisierung vorgegangen bist:</b>
           <TextareaInput
             :response.sync="$magpie.measurements.strategy"
           />
@@ -60,17 +66,17 @@
         <hr>
         <p>
           <label>
-            Gibt es einen Grund, weswegen wir deine Daten nicht auswerten sollten? (z.B. Ablenkungen, Unterbrechungen, Ernsthaftigkeit, Lärm, etc...) 
+            <p><b>Gibt es einen Grund aus dem wir deine Daten nicht auswerten sollten?</b> <br /> (z.B. längere Unterbrechung, Unkonzentriertheit, laute Umgebung, etc...) </p>
             <MultipleChoiceInput
-              :options="['Ja (nicht auswerten)', 'Nein (alles gut)']"
+              :options="['Ja (Daten werden entfernt)', 'Nein (Daten werden behalten)']"
               orientation="horizontal"
               :response.sync="$magpie.measurements.usage" />
           </label>
-          Bitte sei ehrlich! 'Ja' anzukreuzen hat keinerlei negative Auswirkungen für dich (du erhältst zB trotzdem Probandenstunden), aber hilft uns dafür, zuverlässige Daten zu sammeln!
+          <p>Dir entsteht kein Nachteil, diese Frage zu beantworten! <br />Die Zuverlässigkeit unserer Daten ist uns jedoch sehr wichtig.</p>
         </p>
         <hr>
         <p>
-          Hast du noch weitere Anmerkungen? Wir freuen uns über jedes Feedback!
+          Hast du noch weitere Anmerkungen? Wir freuen uns über jegliches Feedback!
           <TextareaInput
             :response.sync="$magpie.measurements.comments"
           />
@@ -80,7 +86,7 @@
       <div>
         <hr>
         <p>
-          Wenn du auf den Knopf klickst, beendest du das Experiment - der Vollbildmodus wird verlassen und deine Daten übermittelt.
+          Durch klicken auf 'Beenden' wird der Vollbildmodus verlassen und deine Daten werden übermittelt.
           <button
             @click="
               $magpie.addExpData($magpie.measurements);
@@ -88,7 +94,7 @@
               fsExit();
             "
           >
-            Beenden & Absenden
+            Beenden
           </button>
         </p>
       </div>
