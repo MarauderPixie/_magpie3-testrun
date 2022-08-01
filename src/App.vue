@@ -34,22 +34,16 @@
     <InstructionScreen>
       <!-- no rule instructions -->
       <div v-if="thisCond() == 1 || thisCond() == 2">
-          <p>Im ersten Abschnitt des Experiments werden dir einige Beispiele geometrischer Figuren gezeigt.
-            Deine Aufgabe ist es, zu erlernen, ob eine Figur zu Kategorie <b>A</b> oder Kategorie <b>B</b> gehört.</p>
-          <p>Tippe oder klicke dazu bitte bei jedem Beispiel, das dir gezeigt wird, auf den entsprechenden Knopf. 
-            Nach jeder Entscheidung bekommst du eine Rückmeldung darüber, ob deine Wahl richtig oder falsch war.
-            Am Anfang musst du raten, letztendlich aber wirst du lernen, wie man die Objekte richtig kategorisiert.</p>
-          <p>Gib dein Bestes, um die Kategorien A und B zu meistern!</p>
+        <p>Im ersten Abschnitt des Experiments werden dir einige Beispiele geometrischer Figuren gezeigt. Deine Aufgabe ist es, zu erlernen, ob eine Figur zu Kategorie <b>A</b> oder Kategorie <b>B</b> gehört.</p>
+        <p>Tippe oder klicke dazu bei jedem Beispiel, das dir gezeigt wird, auf den entsprechenden Knopf. Nach jeder Entscheidung bekommst du eine Rückmeldung darüber, ob deine Wahl richtig oder falsch war.Am Anfang musst du raten, letztendlich aber wirst du lernen, wie man die Objekte richtig kategorisiert.</p>
+        <p>Gib dein Bestes, um die Kategorien A und B zu meistern!</p>
       </div>
 
       <!-- rule-related language -->
       <div v-else>
-          <p>Im ersten Abschnitt des Experiments werden dir einige Beispiele geometrischer Figuren gezeigt.
-            Deine Aufgabe ist es, eine Regel zu erlernen, anhand derer Du entscheiden kannst, ob eine Figur zu Kategorie <b>A</b> oder Kategorie <b>B</b> gehört.</p>
-          <p>Tippe oder klicke dazu bitte bei jedem Beispiel, das dir gezeigt wird, auf den entsprechenden Knopf. 
-            Nach jeder Entscheidung bekommst du eine Rückmeldung darüber, ob deine Wahl richtig oder falsch war.
-            Am Anfang musst du raten, letztendlich aber wirst du lernen, wie man die Objekte richtig kategorisiert.</p>
-          <p>Gib dein Bestes, um die Regeln für Kategorien A und B zu meistern!</p>
+        <p>Im ersten Abschnitt des Experiments werden dir einige Beispiele geometrischer Figuren gezeigt. Deine Aufgabe ist es, eine Regel zu erlernen, anhand derer Du entscheiden kannst, ob eine Figur zu Kategorie <b>A</b> oder Kategorie <b>B</b> gehört.</p>
+        <p>Tippe oder klicke dazu bei jedem Beispiel, das dir gezeigt wird, auf den entsprechenden Knopf. Nach jeder Entscheidung bekommst du eine Rückmeldung darüber, ob deine Wahl richtig oder falsch war. bAm Anfang musst du raten, letztendlich aber wirst du lernen, wie man die Objekte richtig kategorisiert.</p>
+        <p>Gib dein Bestes, um die Regeln für Kategorien A und B zu meistern!</p>
       </div>
     </InstructionScreen>
 

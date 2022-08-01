@@ -72,7 +72,7 @@
               orientation="horizontal"
               :response.sync="$magpie.measurements.usage" />
           </label>
-          <p>Dir entsteht kein Nachteil, diese Frage zu beantworten! <br />Die Zuverlässigkeit unserer Daten ist uns jedoch sehr wichtig.</p>
+          <p>Dir entsteht kein Nachteil, diese Frage zu ehrlich beantworten! <br />Die Zuverlässigkeit unserer Daten ist uns jedoch sehr wichtig.</p>
         </p>
         <hr>
         <p>
