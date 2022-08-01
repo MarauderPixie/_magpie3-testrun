@@ -7,7 +7,9 @@
       <br />
       <div class="bouncy"></div>
       <br />
-      <p>Danke für die Geduld!</p>      
+      <p>Danke für die Geduld!</p>
+      <br />
+      <p>Wenn diese Seite länger als 30 Sekunden angezeigt wird, lade die Seite bitte erneut.</p>
     </ConnectInteractiveScreen> 
     
 
@@ -249,10 +251,10 @@
 .header {
   background-image: url("../public/UOS-Logo_RotFond_sRGB_v01.jpg"), url("../public/logo_ub_2021.png")!important;
   background-repeat: no-repeat !important;
-  background-size: 20%, 20%;
+  background-size: contain;
   background-position: left top, right top;
   text-align: left;
-  height: 96px;
+  height: 64px;
   width: auto;
   margin-bottom: 20px;
 }
