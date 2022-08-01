@@ -1,10 +1,10 @@
 export default {
-  experimentId: '18',
-  serverUrl: 'https://magpie-refactored-2.herokuapp.com/',
-  socketUrl: 'wss://magpie-refactored-2.herokuapp.com/socket',
+  experimentId: '1',
+  serverUrl: 'magpie.jemu.name/api/submit_experiment/',
+  socketUrl: 'wss://magpie.jemu.name/socket',
   // this will be used in prolific mode
   completionUrl: 'https://...',
-  contactEmail: 'test@random.com',
+  contactEmail: 'tanton@uos.de',
   // Either 'debug', 'directLink' or 'prolific'
   mode: 'directLink',
   language: 'de'
