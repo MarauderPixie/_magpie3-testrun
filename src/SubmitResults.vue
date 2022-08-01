@@ -1,5 +1,5 @@
 <template>
-  <Screen v-if="$magpie.debug" title="Fertig.">
+  <Screen v-if="!$magpie.debug" title="Fertig.">
     <Slide>
       <p>Einen Augenblick, Daten werden übermittelt.</p>
       <Wait :time="0" @done="submit(() => $magpie.nextSlide())" />
