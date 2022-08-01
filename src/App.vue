@@ -1,14 +1,13 @@
 <template>
   <Experiment title="Universität Osnabrück - IKW"
-              :image-assets="pictures">
+              :image-assets="pictures" :wide=true>
 
     <ConnectInteractiveScreen :title="'Einen Augenblick, bitte.'">
       <p>Es fehlen noch ein paar kleine Schritte zur Vorbereitung des Experiments.</p>
       <br />
       <div class="bouncy"></div>
       <br />
-      <p>Danke für die Geduld!</p>
-      
+      <p>Danke für die Geduld!</p>      
     </ConnectInteractiveScreen> 
     
 
@@ -80,14 +79,14 @@
     <InstructionScreen>
       <!-- no rule-related language -->
       <div v-if="thisCond() == 1 || thisCond() == 2">
-          <p>Entscheide im nächsten Abschnitt weiterhin, zu welcher Kategorie jedes gezeigte Beispiel deiner Meinung nach gehört.<br />
-            Dieses mal wirst du keine Rückmeldung erhalten.</p>
+          <p>Entscheide im nächsten Abschnitt weiterhin, zu welcher Kategorie jedes gezeigte Beispiel deiner Meinung nach gehört.</p>
+          <p>Dieses mal wirst du keine Rückmeldung erhalten.</p>
       </div>
 
       <!-- rule-related language -->
       <div v-else>
-          <p>Wende im nächsten Abschnitt die Regel an, die du gelernt hast, um zu entscheiden, zu welcher Kategorie jedes gezeigte Beispiel deiner Meinung nach gehört.<br />
-            Dieses mal wirst du keine Rückmeldung erhalten.</p>
+          <p>Wende im nächsten Abschnitt die Regel an, die du gelernt hast, um zu entscheiden, zu welcher Kategorie jedes gezeigte Beispiel deiner Meinung nach gehört.</p>
+          <p>Dieses mal wirst du keine Rückmeldung erhalten.</p>
       </div>
     </InstructionScreen>
 
@@ -160,7 +159,7 @@
     <!-- Demographics & result submission -->
     <Demographics :education=false :gender=false />
 
-    <SubmitResultsScreen />
+    <SubmitResults />
 
   </Experiment>
 </template>
@@ -172,6 +171,7 @@
   import XorGeneralization from './XorGeneralization'
   import XorProbability from './XorProbability'
   import Demographics from './Demographics'
+  import SubmitResults from './SubmitResults'
   import raw_training_mixed from '../trials/training-mixed.csv'
   import raw_training_blocked_size from '../trials/training-blocked-size.csv'
   import raw_training_blocked_shape from '../trials/training-blocked-shape.csv'
@@ -210,7 +210,7 @@
 
   export default {
     name: 'App',
-    components: { XorTraining, XorGeneralization, XorProbability, Demographics },
+    components: { XorTraining, XorGeneralization, XorProbability, Demographics, SubmitResults },
     data() {
       return {
         pictures: raw_generalization.map(task => task.image),
@@ -245,7 +245,17 @@
     }
   };
 </script>
-<style scoped>
+<style>
+.header {
+  background-image: url("../public/UOS-Logo_RotFond_sRGB_v01.jpg"), url("../public/logo_ub_2021.png")!important;
+  background-repeat: no-repeat !important;
+  background-size: 20%, 20%;
+  background-position: left top, right top;
+  text-align: left;
+  height: 96px;
+  width: auto;
+  margin-bottom: 20px;
+}
 .bouncy {
   width: 20px;
   height: 20px;
