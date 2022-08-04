@@ -11,7 +11,7 @@
           <Wait :time="3000" @done="redirectToCompletionUrl" />
         </p>
         <p>
-          Cognitive Science Studierende der Uni Osnabrück und Psychologie Studierende der Uni Bremen können <a href="https://www.google.de" target="_blank">diesem Link folgen</a>, um eine halbe Probandenstunde zu erhalten.
+          Cognitive Science Studierende der Uni Osnabrück und Psychologie Studierende der Uni Bremen können <a href="https://marauderpixie.github.io/ma-thesis-vp-hours/" target="_blank">diesem Link folgen</a>, um eine halbe Probandenstunde zu erhalten.
         </p>
         <p>Dieses Fenster kann nun geschlossen werden.</p>
       </div>
