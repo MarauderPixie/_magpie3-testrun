@@ -24,7 +24,7 @@
       </p>
 
       <p>
-        Die Teilnahme erfolgt vollkommen anonym und freiwillig. Das Experiment kann jederzeit abgebrochen werden; dazu genügt es, den Browser-Tab bzw. das Fenster zu schließen. In diesem Fall werden keine Daten gespeichert. Datenspeicherung und -übertragung finden erst am Ende des Experiments statt.
+        Die Teilnahme erfolgt vollkommen anonym und freiwillig. Das Experiment kann jederzeit abgebrochen werden; dazu genügt es, den Browser-Tab bzw. das Fenster zu schließen. In diesem Fall werden keine Daten gespeichert. Datenspeicherung und -übertragung finden erst am Ende des Experiments statt. Studierende der Psychologie und der Cognitive Science der Universitäten Osnabrück und Bremen haben am Ende des Experiments außerdem die Möglichkeit, eine halbe Probandenstunde zu erhalten und werden dazu auf eine externe Webseite weitergeleitet.
       </p>
 
       <button @click="fsEnter()" style="width: 40%;">
@@ -57,15 +57,15 @@
     <InstructionScreen>
       <!-- no rule instructions -->
       <div v-if="thisCond() == 1 || thisCond() == 2">
-        <p>Im ersten Abschnitt des Experiments werden dir einige Beispiele geometrischer Figuren gezeigt. Deine Aufgabe ist es, zu erlernen, ob eine Figur zu Kategorie <b>A</b> oder Kategorie <b>B</b> gehört.</p>
-        <p>Tippe oder klicke dazu bei jedem Beispiel, das dir gezeigt wird, auf den entsprechenden Knopf. Nach jeder Entscheidung bekommst du eine Rückmeldung darüber, ob deine Wahl richtig oder falsch war.Am Anfang musst du raten, letztendlich aber wirst du lernen, wie man die Objekte richtig kategorisiert.</p>
+        <p>Im ersten Abschnitt des Experiments werden dir einige Beispiele geometrischer Figuren gezeigt. Deine Aufgabe ist es, zu erlernen, ob eine Figur zu Kategorie <b>A</b> oder zu Kategorie <b>B</b> gehört.</p>
+        <p>Klicke dazu bei jedem Beispiel, das dir gezeigt wird, auf die entsprechende Schaltfläche. Nach jeder Entscheidung bekommst du eine Rückmeldung darüber, ob deine Wahl richtig oder falsch war. Am Anfang musst du raten, letztendlich aber wirst du lernen, wie man die Objekte richtig kategorisiert.</p>
         <p>Gib dein Bestes, um die Kategorien A und B zu meistern!</p>
       </div>
 
       <!-- rule-related language -->
       <div v-else>
-        <p>Im ersten Abschnitt des Experiments werden dir einige Beispiele geometrischer Figuren gezeigt. Deine Aufgabe ist es, eine Regel zu erlernen, anhand derer Du entscheiden kannst, ob eine Figur zu Kategorie <b>A</b> oder Kategorie <b>B</b> gehört.</p>
-        <p>Tippe oder klicke dazu bei jedem Beispiel, das dir gezeigt wird, auf den entsprechenden Knopf. Nach jeder Entscheidung bekommst du eine Rückmeldung darüber, ob deine Wahl richtig oder falsch war. bAm Anfang musst du raten, letztendlich aber wirst du lernen, wie man die Objekte richtig kategorisiert.</p>
+        <p>Im ersten Abschnitt des Experiments werden dir einige Beispiele geometrischer Figuren gezeigt. Deine Aufgabe ist es, eine Regel zu erlernen, anhand derer Du entscheiden kannst, ob eine Figur zu Kategorie <b>A</b> oder zu Kategorie <b>B</b> gehört.</p>
+        <p>Klicke dazu bei jedem Beispiel, das dir gezeigt wird, auf die entsprechende Schaltfläche. Nach jeder Entscheidung bekommst du eine Rückmeldung darüber, ob deine Wahl richtig oder falsch war. Am Anfang musst du raten, letztendlich aber wirst du lernen, wie man die Objekte richtig kategorisiert.</p>
         <p>Gib dein Bestes, um die Regeln für Kategorien A und B zu meistern!</p>
       </div>
     </InstructionScreen>
