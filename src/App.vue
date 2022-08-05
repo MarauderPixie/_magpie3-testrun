@@ -13,23 +13,46 @@
     </ConnectInteractiveScreen> 
     
 
-    <!-- INSTRUCTIONS 
-    <Demographics :education=true :gender=false /> -->
-    <InstructionScreen :title="'Willkommen'">
-      <p>Vielen Dank für die Teilnahme an dieser Studie!</p>
-      <p>Das Ziel dieses Projekts ist, etwas darüber herauszufinden, wie Klassifikationsaufgaben von Menschen erlernt und ausgeführt werden. Insgesamt wird die Teilnahme etwa 10 bis 15 Minuten in Anspruch nehmen.</p>
-      <p>Die Teilnahme erfolgt vollkommen anonym und freiwillig. Das Experiment kann jederzeit abgebrochen werden; dazu genügt es, den Browser-Tab bzw. das Fenster zu schließen. In diesem Fall werden keine Daten gespeichert. Datenspeicherung und -übertragung finden erst am Ende des Experiments statt.</p>
-      <button @click="fsEnter()" style="width: 60%;">Bitte diesen Button klicken, um in den Vollbild-Modus zu wechseln.</button>
+    <!-- INSTRUCTIONS -->
+    <Screen class="welcome" :title="'Willkommen'">
+      <p style="text-align: center;">
+        Vielen Dank für die Teilnahme an dieser Studie!
+      </p>
+
+      <p>
+        Das Ziel dieses Projekts ist, etwas darüber herauszufinden, wie Klassifikationsaufgaben von Menschen erlernt und ausgeführt werden. Dabei handelt es sich um eine Kooperation zwischen der Universität Bremen (Abteilung Allgemeine Psychologie) und der Universität Osnabrück (Institut für Kognitionswissenschaften). Insgesamt wird die Teilnahme etwa 10 bis 15 Minuten in Anspruch nehmen.
+      </p>
+
+      <p>
+        Die Teilnahme erfolgt vollkommen anonym und freiwillig. Das Experiment kann jederzeit abgebrochen werden; dazu genügt es, den Browser-Tab bzw. das Fenster zu schließen. In diesem Fall werden keine Daten gespeichert. Datenspeicherung und -übertragung finden erst am Ende des Experiments statt.
+      </p>
+
+      <button @click="fsEnter()" style="width: 40%;">
+        Bitte diesen Button klicken, um in den Vollbild-Modus zu wechseln.
+      </button>
       
-      <p>Mit dem Klick auf den "Weiter"-Button erkläre ich, dass
+      <p>
+        Mit dem Klick auf den "Weiter"-Button erkläre ich, dass
         <ol>
           <li>Ich einverstanden bin, dass meine Daten anonymisiert auf der Plattform Open Science Framework (osf.io) veröffentlicht werden und im Rahmen von wissenschaftlichen Publikationen (z.B. Vorträge, Veröffentlichung in Fachzeitschriften) verwendet werden. Bitte beachten Sie, dass Sie eine Löschung Ihrer Daten im Nachhinein nicht mehr veranlassen können, da die Daten nur in anonymisierter Form gespeichert werden.</li>
           <li>Ich freiwillig teilnehme und weiß, dass ich die Studie jederzeit ohne Angabe von Gründen abbrechen kann ohne dass mir daraus Nachteile entstehen. In diesem Fall werden keine Daten gespeichert.</li>
           <li>Ich ausreichend über die Studie aufgeklärt wurde.</li>
         </ol>
-      Weitere Fragen können per Email an tanton@uni-osnabrueck.de gerichtet werden.</p>
-      <p style="text-align: center">Auf 'weiter' klicken, um mit dem Experiment zu beginnen.</p>
-    </InstructionScreen>
+        Weitere Fragen können per Email an <a href="tanton@uos.de">tanton@uos.de</a> gerichtet werden.
+      </p>
+
+      <p style="text-align: center">
+        Auf 'weiter' klicken, um mit dem Experiment zu beginnen.
+        <button @click= "$magpie.nextScreen();">Weiter</button>
+      </p>
+
+      <hr>
+      <p class="footer">
+        <b>Studienverantwortlicher:</b> Tobias Anton - Emmastraße 281, 28213 Bremen
+        <br />
+        <b>Kontakt:</b> <a href="tanton@uos.de">tanton@uos.de</a>
+      </p>
+    </Screen>
 
     <InstructionScreen>
       <!-- no rule instructions -->
@@ -57,7 +80,6 @@
         <Record :data="grpIdent(coin)" :global=true />
         <img :src="trial.image" /> 
               
-        <!-- evtl. muss ich mir "einfach" (haha) eigene buttons bauen -->
         <XorTraining
             :response.sync= "$magpie.measurements.response"
             :options="['A', 'B']"
@@ -67,7 +89,7 @@
         <p v-if="$magpie.measurements.response">
             <span v-if="$magpie.measurements.response === (coin === 'heads' ? trial.correct1 : trial.correct2)"><b>Korrekt!</b></span> 
             <span v-else><b>Falsch</b></span>
-            <button @click= "$magpie.saveAndNextScreen();">Next</button>
+            <button @click= "$magpie.saveAndNextScreen();">Weiter</button>
         </p>
     </Screen>
     
@@ -101,7 +123,7 @@
             :feedbackTime=-1 /> 
 
         <p v-if="$magpie.measurements.response">
-            <button @click= "$magpie.saveAndNextScreen();">Next</button>
+            <button @click= "$magpie.saveAndNextScreen();">Weiter</button>
         </p>
     </Screen>
 
@@ -251,6 +273,16 @@
   height: 64px;
   width: auto;
   margin-bottom: 20px;
+}
+.welcome {
+  text-align: justify;
+  margin: auto;
+  width: 70%;
+}
+.footer {
+  text-align: center;
+  color: #555E62;
+  font-size: 10pt;
 }
 .bouncy {
   width: 20px;
