@@ -14,7 +14,10 @@
     
 
     <!-- INSTRUCTIONS -->
-    <Screen class="welcome" :title="'Willkommen'">
+    <Screen class="welcome">
+      <div class="logos"></div>
+      <h2>Willkommen</h2>
+
       <p style="text-align: center;">
         Vielen Dank für die Teilnahme an dieser Studie!
       </p>
@@ -57,16 +60,20 @@
     <InstructionScreen>
       <!-- no rule instructions -->
       <div v-if="thisCond() == 1 || thisCond() == 2">
-        <p>Im ersten Abschnitt des Experiments werden dir einige Beispiele geometrischer Figuren gezeigt. Deine Aufgabe ist es, zu erlernen, ob eine Figur zu Kategorie <b>A</b> oder zu Kategorie <b>B</b> gehört.</p>
+        <p>Im ersten Abschnitt des Experiments werden dir nacheinander einige Beispiele geometrischer Figuren gezeigt, die sich in ihrer Farbe und Größe unterscheiden. Deine Aufgabe ist es, zu erlernen, ob eine Figur zur Kategorie <b>Nobz</b> oder zur Kategorie <b>Grot</b> gehört:</p>
+        <img src="../public/images/e25_2750-500.jpg" 
+             style="display:block; margin: 0 auto;">
         <p>Klicke dazu bei jedem Beispiel, das dir gezeigt wird, auf die entsprechende Schaltfläche. Nach jeder Entscheidung bekommst du eine Rückmeldung darüber, ob deine Wahl richtig oder falsch war. Am Anfang musst du raten, letztendlich aber wirst du lernen, wie man die Objekte richtig kategorisiert.</p>
-        <p>Gib dein Bestes, um die Kategorien A und B zu meistern!</p>
+        <p>Gib dein Bestes, um die Kategorien Nobz und Grot zu meistern!</p>
       </div>
 
       <!-- rule-related language -->
       <div v-else>
-        <p>Im ersten Abschnitt des Experiments werden dir einige Beispiele geometrischer Figuren gezeigt. Deine Aufgabe ist es, eine Regel zu erlernen, anhand derer Du entscheiden kannst, ob eine Figur zu Kategorie <b>A</b> oder zu Kategorie <b>B</b> gehört.</p>
+        <p>Im ersten Abschnitt des Experiments werden dir nacheinander einige Beispiele geometrischer Figuren gezeigt. Deine Aufgabe ist es, anhand von Farbe und Größe eine Regel zu erlernen, mit der Du entscheiden kannst, ob eine Figur zur Kategorie <b>Nobz</b> oder zur Kategorie <b>Grot</b> gehört:</p>
+        <img src="../public/images/e25_2750-500.jpg" 
+             style="display:block; margin: 0 auto;">
         <p>Klicke dazu bei jedem Beispiel, das dir gezeigt wird, auf die entsprechende Schaltfläche. Nach jeder Entscheidung bekommst du eine Rückmeldung darüber, ob deine Wahl richtig oder falsch war. Am Anfang musst du raten, letztendlich aber wirst du lernen, wie man die Objekte richtig kategorisiert.</p>
-        <p>Gib dein Bestes, um die Regeln für Kategorien A und B zu meistern!</p>
+        <p>Gib dein Bestes, um die Regeln für Kategorien Nobz und Grot zu meistern!</p>
       </div>
     </InstructionScreen>
 
@@ -82,7 +89,7 @@
               
         <XorTraining
             :response.sync= "$magpie.measurements.response"
-            :options="['A', 'B']"
+            :options="['Nobz', 'Grot']"
             :correct="(coin === 'heads' ? trial.correct1 : trial.correct2)"
             :feedbackTime=-1 /> 
             
@@ -96,15 +103,11 @@
 
     <InstructionScreen>
       <!-- no rule-related language -->
-      <div v-if="thisCond() == 1 || thisCond() == 2">
-          <p>Entscheide im nächsten Abschnitt weiterhin, zu welcher Kategorie jedes gezeigte Beispiel deiner Meinung nach gehört.</p>
-          <p>Dieses mal wirst du keine Rückmeldung erhalten.</p>
-      </div>
-
-      <!-- rule-related language -->
-      <div v-else>
-          <p>Wende im nächsten Abschnitt die Regel an, die du gelernt hast, um zu entscheiden, zu welcher Kategorie jedes gezeigte Beispiel deiner Meinung nach gehört.</p>
-          <p>Dieses mal wirst du keine Rückmeldung erhalten.</p>
+      <div style="text-align: center;">
+      <h3>Gut gemacht!</h3>
+        <p>Die Lernphase ist beendet, nun folgt der zweite Teil.</p>
+        <p>Die Aufgabe ist die gleiche wie zuvor, nur werden nun alte sowie neue Objekte gezeigt. Dieses mal wirst du jedoch keine Rückmeldung erhalten.</p>
+        <p>Wende bitte an, was du im ersten Teil gelernt hast!</p>
       </div>
     </InstructionScreen>
 
@@ -119,36 +122,25 @@
 
         <XorGeneralization
             :response.sync= "$magpie.measurements.response"
-            :options="['A', 'B']"
+            :options="['Nobz', 'Grot']"
             :feedbackTime=-1 /> 
-
-        <p v-if="$magpie.measurements.response">
-            <button @click= "$magpie.saveAndNextScreen();">Weiter</button>
-        </p>
     </Screen>
 
 
     <InstructionScreen>
       <!-- no rule-related language -->
-      <div v-if="thisCond() == 1 || thisCond() == 2">
+      <div>
+        <h3>Vielen Dank!</h3>
         <p>Nun zum letzten Abschnitt der Studie. In diesem Durchgang möchten wir gerne wissen, wie hoch du die Wahrscheinlichkeit einschätzt, dass das gezeigte Beispiel zu einer der beiden Kategorien gehört. Verschiebe dazu den Regler in die jeweilige Richtung: </p>
 
         <XorProbability
-          :response.sync= "$magpie.measurements.prob"
+          :response.sync="$magpie.measurements.prob"
           :initial=50 
-          option-left="A"
-          option-right="B"/>
-      </div>
-
-      <!-- rule-related language -->
-      <div v-else>
-        <p>Nun zum letzten Abschnitt der Studie. In diesem Durchgang möchten wir gerne wissen, wie hoch du die Wahrscheinlichkeit einschätzt, dass das gezeigte Beispiel zu einer der beiden Kategorien gehört, wenn du die gelernte Regel anwendest. Verschiebe dazu den Regler in die jeweilige Richtung:</p>
-
-        <XorProbability
-          :response.sync= "$magpie.measurements.prob"
-          :initial=50 
-          option-left="A"
-          option-right="B"/>
+          left="Nobz"
+          right="Grot"
+          style="width: 70%;"/>
+        
+        <p>Wenn du denkst, dass beide Kategorien gleich wahrscheinlich sind, belasse den Regler einfach in der Mitte.</p>
       </div>
     </InstructionScreen>
 
@@ -161,16 +153,14 @@
         <img :src="trial.image" /> 
         
         <XorProbability
-          :response.sync= "$magpie.measurements.prob"
+          :response.sync="$magpie.measurements.prob"
           :initial=50 
-          option-left="A"
-          option-right="B"/>
-          
-        <div v-if="typeof $magpie.measurements.prob === 'number'">
+          left="Nobz"
+          right="Grot"/>
+        
           <button @click= "$magpie.saveAndNextScreen();">
             Weiter
           </button>
-        </div>
     </Screen>
     
 
@@ -264,7 +254,7 @@
   };
 </script>
 <style>
-.header {
+.logos {
   background-image: url("../public/UOS-Logo_RotFond_sRGB_v01.jpg"), url("../public/logo_ub_2021.png")!important;
   background-repeat: no-repeat !important;
   background-size: contain;
