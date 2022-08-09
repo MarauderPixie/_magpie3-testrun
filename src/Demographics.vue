@@ -58,7 +58,7 @@
            -->
         <slot :measurements="$magpie.measurements" />
         <p>
-          <b>Beschreibe bitte, wie du bei der Kategorisierung vorgegangen bist:</b>
+          <b>Beschreibe bitte, wie du bei der Kategorisierung im zweiten Abschnitt vorgegangen bist:</b>
           <TextareaInput
             :response.sync="$magpie.measurements.strategy"
           />
@@ -66,7 +66,7 @@
         <hr>
         <p>
           <label>
-            <p><b>Gibt es einen Grund aus dem wir deine Daten nicht auswerten sollten?</b> <br /> (z.B. längere Unterbrechung, Unkonzentriertheit, laute Umgebung, etc...) </p>
+            <p><b>Gibt es einen Grund aus dem wir deine Daten nicht auswerten sollten?</b> <br /> (z.B. längere Unterbrechung, Unkonzentriertheit, laute Umgebung, zweite Teilnahme, etc...) </p>
             <MultipleChoiceInput
               :options="['Ja (Daten werden entfernt)', 'Nein (Daten werden behalten)']"
               orientation="horizontal"
