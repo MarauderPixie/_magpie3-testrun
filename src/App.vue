@@ -61,8 +61,8 @@
       <!-- no rule instructions -->
       <div v-if="thisCond() == 1 || thisCond() == 2">
         <p>Im ersten Abschnitt des Experiments werden dir nacheinander einige Beispiele geometrischer Figuren gezeigt, die sich in ihrer Farbe und Größe unterscheiden. Deine Aufgabe ist es, zu erlernen, ob eine Figur zur Kategorie <b>Nobz</b> oder zur Kategorie <b>Grot</b> gehört:</p>
-        <img src="../public/images/e25_2750-500.jpg" 
-             style="display:block; margin: 0 auto;">
+        <img src="../public/images/e07_1500-900.jpg" 
+             style="display:block; margin: -80px auto; position: relative; z-index: -1;">
         <p>Klicke dazu bei jedem Beispiel, das dir gezeigt wird, auf die entsprechende Schaltfläche. Nach jeder Entscheidung bekommst du eine Rückmeldung darüber, ob deine Wahl richtig oder falsch war. Am Anfang musst du raten, letztendlich aber wirst du lernen, wie man die Objekte richtig kategorisiert.</p>
         <p>Gib dein Bestes, um die Kategorien Nobz und Grot zu meistern!</p>
       </div>
@@ -70,8 +70,8 @@
       <!-- rule-related language -->
       <div v-else>
         <p>Im ersten Abschnitt des Experiments werden dir nacheinander einige Beispiele geometrischer Figuren gezeigt. Deine Aufgabe ist es, anhand von Farbe und Größe eine Regel zu erlernen, mit der Du entscheiden kannst, ob eine Figur zur Kategorie <b>Nobz</b> oder zur Kategorie <b>Grot</b> gehört:</p>
-        <img src="../public/images/e25_2750-500.jpg" 
-             style="display:block; margin: 0 auto;">
+        <img src="../public/images/e07_1500-900.jpg" 
+             style="display:block; margin: -80px auto; position: relative; z-index: -1;">
         <p>Klicke dazu bei jedem Beispiel, das dir gezeigt wird, auf die entsprechende Schaltfläche. Nach jeder Entscheidung bekommst du eine Rückmeldung darüber, ob deine Wahl richtig oder falsch war. Am Anfang musst du raten, letztendlich aber wirst du lernen, wie man die Objekte richtig kategorisiert.</p>
         <p>Gib dein Bestes, um die Regeln für Kategorien Nobz und Grot zu meistern!</p>
       </div>
