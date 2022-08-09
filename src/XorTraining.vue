@@ -93,15 +93,15 @@ export default {
   cursor: pointer;
   display: inline-block;
   font-family: 'Lato', 'Noto Sans', sans-serif;
-  font-size: 40px;
-  line-height: 90px;
-  height: 90px;
-  width: 100px;
+  font-size: 28px;
+  line-height: 80px;
+  height: 80px;
+  width: 110px;
   font-weight: 700;
   letter-spacing: 0.9px;
   margin: 0 100px;
   outline: none;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 .option:hover {

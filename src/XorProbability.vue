@@ -106,7 +106,7 @@ export default {
 
 .slider {
   flex-grow: 1;
-  width: 50%;
+  width: 40%;
   display: block;
   margin: auto;
 }
