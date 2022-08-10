@@ -27,7 +27,7 @@
       </p>
 
       <p>
-        Die Teilnahme erfolgt vollkommen anonym und freiwillig. Das Experiment kann jederzeit abgebrochen werden; dazu genügt es, den Browser-Tab bzw. das Fenster zu schließen. In diesem Fall werden keine Daten gespeichert. Datenspeicherung und -übertragung finden erst am Ende des Experiments statt. Studierende der Psychologie und der Cognitive Science der Universitäten Osnabrück und Bremen haben am Ende des Experiments außerdem die Möglichkeit, eine halbe Probandenstunde zu erhalten und werden dazu auf eine externe Webseite weitergeleitet.
+        Die Teilnahme erfolgt vollkommen anonym und freiwillig. Das Experiment kann jederzeit abgebrochen werden. Dazu genügt es, den Browser-Tab bzw. das Fenster zu schließen. In diesem Fall werden keine Daten gespeichert. Datenspeicherung und -übertragung finden erst am Ende des Experiments statt. Studierende der Psychologie und der Cognitive Science der Universitäten Osnabrück und Bremen haben am Ende des Experiments außerdem die Möglichkeit eine halbe Probandenstunde zu erhalten und werden dazu auf eine externe Webseite weitergeleitet.
       </p>
 
       <button @click="fsEnter()" style="width: 40%;">
@@ -248,7 +248,15 @@
         return obj
       },
       fsEnter: function() {
-        document.documentElement.requestFullscreen();
+        var x = document.documentElement;
+        /* document.documentElement.requestFullscreen(); */ 
+        if (x.requestFullscreen) {
+          x.requestFullscreen();
+        } else if (x.webkitRequestFullscreen) { /* Safari */
+          x.webkitRequestFullscreen();
+        } else if (x.msRequestFullscreen) { /* IE11 */
+          x.msRequestFullscreen();
+        }
       }
     }
   };
