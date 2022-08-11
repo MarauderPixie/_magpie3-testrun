@@ -51,7 +51,9 @@
 
       <hr>
       <p class="footer">
-        <b>Studienverantwortlicher:</b> Tobias Anton - Emmastraße 281, 28213 Bremen
+        <b>Studienverantwortlicher:</b> Tobias Anton
+        <br />
+        <b>Addresse:</b> Cognium Gebäude, Raum 0430, Hochschulring 18, 28359 Bremen
         <br />
         <b>Kontakt:</b> <a href="tanton@uos.de">tanton@uos.de</a>
       </p>
@@ -281,6 +283,12 @@
   text-align: center;
   color: #555E62;
   font-size: 10pt;
+}
+.vue-slider-process {
+  background-color: #ccc;
+}
+.vue-slider-dot-handle {
+  box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.32);
 }
 .bouncy {
   width: 20px;
