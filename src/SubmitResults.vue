@@ -11,7 +11,7 @@
           <Wait :time="3000" @done="redirectToCompletionUrl" />
         </p>
         <p>
-          Cognitive Science Studierende der Uni Osnabrück und Psychologie Studierende der Uni Bremen können <a href="https://marauderpixie.github.io/ma-thesis-vp-hours/" target="_blank">diesem Link folgen</a>, um eine halbe Probandenstunde zu erhalten.
+          Cognitive Science Studierende der Uni Osnabrück und Psychologie Studierende der Uni Bremen können <a href="https://marauderpixie.github.io/ma-thesis-vp-hours/" target="_blank">diesem Link folgen</a>, um eine halbe Probandenstunde zu erhalten. Gib dort auch noch folgenden Code in das entsprechende Feld ein: <b>{{rndString()}}</b>
         </p>
         <p>Dieses Fenster kann nun geschlossen werden.</p>
       </div>
@@ -58,6 +58,9 @@ export default {
       if (this.$magpie.completionUrl && this.$magpie.mode === 'prolific') {
         window.location = this.$magpie.completionUrl;
       }
+    },
+    rndString() {
+      return Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 6);
     }
   }
 };
