@@ -237,8 +237,9 @@
         return chain
       },
       thisCond: function() {
-        var condition = this.$magpie.socket.variant
+        // var condition = this.$magpie.socket.variant
         // console.log("This condition:", condition)
+        var condition = 3
         return condition
       },
       grpIdent: function(coin) {
