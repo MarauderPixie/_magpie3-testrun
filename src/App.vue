@@ -16,8 +16,17 @@
     <!-- INSTRUCTIONS -->
     <Screen class="welcome">
       <div class="logos"></div>
-      <h2>Willkommen</h2>
+      <h2>Willkommen!</h2>
 
+      <p style="text-align:center;margin-left:20%;margin-right:20%;">Vielen Dank für dein Interesse an unserer Studie. Das Experiment ist inzwischen beendet und dank Leuten wie dir sind wir statt der benötigten 160 Teilnehmer*innen sogar auf unfassbare 196 Leute gekommen!</p>
+
+      <img src="https://media.tenor.com/eQiIokXFymIAAAAd/travolta-mem.gif" style="vertical-align:middle;margin-left:35%;"/>
+
+      <p style="text-align:center;margin-left:20%;margin-right:20%;">Die Chancen stehen gut, dass du unter anderem hier bist, weil du studierst und du eine einfache (halbe) Probandenstunde sammeln wolltest. In dem Fall können wir dir leider nur viel Erfolg beim Sammeln an anderer Stelle wünschen.</p>
+
+      <p style="text-align:center;margin-left:20%;margin-right:20%;">Dieses Fenster kann einfach geschlossen werden.</p>
+
+      <!--
       <p style="text-align: center;">
         Vielen Dank für die Teilnahme an dieser Studie!
       </p>
@@ -47,7 +56,7 @@
       <p style="text-align: center">
         Auf 'weiter' klicken, um mit dem Experiment zu beginnen.
         <button @click= "$magpie.nextScreen();">Weiter</button>
-      </p>
+      </p> -->
 
       <hr>
       <p class="footer">
